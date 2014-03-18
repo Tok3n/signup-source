@@ -1,0 +1,38 @@
+body
+  background: #eee
+
+.input-half-width
+  width: 50%
+  padding: .25em
+
+html.flexbox
+
+  .main
+    +display-box()
+    display: flex
+    align-items: center
+    justify-content: center
+    min-height: 100vh
+
+  .content
+    @extend .well
+    @extend .col-md-8
+    padding: 4rem
+    border: 1px solid #ddd
+    background: #fff
+    @media (min-width: $screen-sm)
+      margin-top: 2rem
+      margin-bottom: 2rem
+
+.signup-form
+  .row
+    margin-top: 1rem
+  input,
+  .btn
+    @media (min-width: $screen-sm)
+      font-weight: 300
+      height: auto
+      font-size: 150%
+  h2
+    margin-top: 22px
+    margin-bottom: 22px

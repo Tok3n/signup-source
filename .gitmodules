@@ -1,0 +1,3 @@
+[submodule "chosen"]
+	path = chosen
+	url = https://github.com/nickb1080/chosen.git
