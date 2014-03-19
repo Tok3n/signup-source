@@ -1,10 +1,6 @@
 body
   background: #eee
 
-.input-half-width
-  width: 50%
-  padding: .25em
-
 html.flexbox
 
   .main
@@ -13,26 +9,52 @@ html.flexbox
     align-items: center
     justify-content: center
     min-height: 100vh
+    margin-top: 15px
+    margin-bottom: 15px
 
   .content
     @extend .well
     @extend .col-md-8
-    padding: 4rem
+    padding: 3rem 4rem 4rem
     border: 1px solid #ddd
     background: #fff
-    @media (min-width: $screen-sm)
-      margin-top: 2rem
-      margin-bottom: 2rem
+    // @media (min-width: $screen-sm)
+    //   margin-top: 2rem
+    //   margin-bottom: 2rem
+
+h2
+  margin-top: 22px
+  margin-bottom: 22px
 
 .signup-form
   .row
-    margin-top: 1rem
+    margin-top: 1em
   input,
-  .btn
+  .btn,
     @media (min-width: $screen-sm)
       font-weight: 300
       height: auto
       font-size: 150%
-  h2
-    margin-top: 22px
-    margin-bottom: 22px
+
+.info-box
+  margin-bottom: 1rem
+
+.input-group-addon-select
+  padding: 0
+  select
+    -webkit-appearance: none
+    -moz-appearance: none
+    background: transparent
+    padding: 9px
+    color: rgba(51, 51, 51, .65)
+    border: 0
+    position: relative
+    // cursor: pointer
+    cursor: context-menu
+    &:not(:valid)
+      background-color: $state-warning-bg
+    &:valid
+      background-color: $state-success-bg
+    @media (min-width: $screen-sm)
+      font-size: 150%
+      padding: 11px

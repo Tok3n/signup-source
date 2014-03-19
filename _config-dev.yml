@@ -1,4 +1,4 @@
 name: Tok3n Developer Sign Up
-baseurl: /tok3n-signup/
+baseurl: /
 markdown: redcarpet
 pygments: true

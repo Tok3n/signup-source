@@ -1,0 +1,37 @@
+| ---
+| layout: default
+| title: Tok3n Signup Page
+| ---
+
+.container-fluid.info-box
+  h1.text-center.text-weight-light Sign Up For Tok3n Today
+
+form.signup-form.container-fluid(role='form')
+  .row
+    .col-md-6
+      .form-group
+        label.sr-only(for='firstNameInput') First Name
+        input#firstNameInput.form-control(type='text', placeholder='First name')
+    .col-md-6
+      .form-group
+        label.sr-only(for='lastNameInput') Last name
+        input#lastNameInput.form-control(type='text', placeholder='Last name')
+  .row
+    .col-md-12
+      .form-group
+        label.sr-only(for='emailInput') Email address
+        input#emailInput.form-control(type='email', placeholder='Email address')
+  .row
+    .col-md-6
+      .form-group
+        label.sr-only(for='passwordInitialInput') Password
+        input#passwordInitialInput.form-control(type='password', placeholder='Password')
+    .col-md-6
+      .form-group
+        label.sr-only(for='passwordConfirmInput') Password, again
+        input#passwordConfirmInput.form-control(type='password', placeholder='Password, again')
+  .row
+    .col-md-6.col-md-offset-3
+      p.text-center
+        a.btn.btn-success.btn-lg.btn-block(href='./tfa.html', role='button')
+          | Get Started

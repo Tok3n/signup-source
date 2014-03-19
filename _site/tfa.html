@@ -9,7 +9,7 @@
         <!-- This stylesheet uses includes to pull everything together -->
         <link rel="stylesheet" href="/css/styles.css">
 
-        <script src="js/modernizr.js"></script>
+        <script src="/js/modernizr.js"></script>
 
     </head>
     <body>
@@ -26,16 +26,21 @@
 </div>
 
 <form class="container-fluid signup-form">
+
   <div class="row">
     <div class="col-md-6">
-      <input type="text" class="form-control" list="countryList">
+      <div class="form-group">
+        <input type="text" class="form-control" list="countryList">
+      </div>
     </div>
 
     <div class="col-md-6">
-      <label class="sr-only">Phone Number</label>
-      <div class="input-group">
-        <span class="input-group-addon" id="phoneNumberCountryCode">+1</span>
-        <input type="phone" class="form-control" placeholder="Phone number">
+      <div class="form-group">
+        <label class="sr-only" for="phoneNumber">Phone Number</label>
+        <div class="input-group">
+          <span class="input-group-addon" id="phoneNumberCountryCode">+1</span>
+          <input type="phone" class="form-control" placeholder="Phone number" id="phoneNumber">
+        </div>
       </div>
     </div>
 

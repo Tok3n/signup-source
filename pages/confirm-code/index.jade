@@ -1,0 +1,29 @@
+| ---
+| layout: default
+| title: Code Confirmation
+| ---
+
+.container-fluid.info-box
+  h2.text-center.text-weight-light
+    | Please enter the code you received
+
+form.container-fluid.signup-form
+
+  .row
+    .col-md-5.col-md-offset-1
+      label.sr-only Confirmation code
+      input.form-control(type='phone', placeholder='Confirmation code')
+    .col-md-5
+      a.btn.btn-success.btn-block(href='first-app.html', role='button') Go
+
+  .row
+    p.text-center.text-subtle-regular
+      span.block
+        | Didn't receive a code?
+        a(href='#') Resend it
+      span.block
+        | or authenticate with a
+        a(href='#') QR code
+        | or
+        a(href='#') phone call
+        | .

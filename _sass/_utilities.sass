@@ -1,3 +1,4 @@
+// text font weight
 .text-weight-xlight
   font-weight: 100
 
@@ -13,6 +14,10 @@
 .text-weight-xbold
   font-weight: 900
 
+
+
+
+// text coloring
 .text-subtle-min
   color: rgba(51, 51, 51, .75)
 
@@ -22,6 +27,10 @@
 .text-subtle-max
   color: rgba(51, 51, 51, .35)
 
+
+
+
+// text display
 .block
   display: block
 
@@ -30,3 +39,12 @@
 
 .inline-block
   display: inline-block
+
+
+
+// subtitles
+.subtitle
+  @extend .block
+  @extend .text-weight-bold
+  margin-top: .5em
+  font-size: .5em
