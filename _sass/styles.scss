@@ -1,9 +1,11 @@
 // customize bootstrap variables here:
 @import "compass";
+@import "flexbox";
 @import "variables";
 @import "bootstrap";
 
+@import "flexbox-progress-bar";
+
 @import "utilities";
 @import "twbs-additions";
-@import "progress-meter";
 @import "signup";

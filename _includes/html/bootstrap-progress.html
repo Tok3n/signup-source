@@ -1,0 +1,7 @@
+{% if page.progress_value > 0 %}  
+  <div class="progress-wrapper">
+    <div class="progress">
+      <div class="progress-bar" role="progress-bar" aria-valuenow="{{ page.progress_value }}" aria-valuemin="0" aria-valuemax="100%" style="width: {{ page.progress_value}}%;">
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Confirmation</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+        
+        <!-- This stylesheet uses includes to pull everything together -->
+        <link rel="stylesheet" href="/css/styles.css">
+
+        <script src="/js/modernizr.js"></script>
+
+    </head>
+    <body>
+
+        <!--  -->
+
+        <section class="main container">
+          <div class="content">
+            
+            <div id="appSetup1" class="view-wrapper">
+  <div class="container-fluid info-box">
+    <h2 class="text-center text-weight-light">Set up your first app<span class="subtitle">Improve your application security now</span></h2>
+  </div>
+  <form class="container-fluid signup-form">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="applicationName" class="sr-only">Application Name</label>
+          <input id="applicationName" type="text" placeholder="Application name" class="form-control"/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="input-group"><span class="input-group-addon input-group-addon-select">
+            <select required="required">
+              <option value="" disabled="disabled">Method ▾</option>
+              <option value="get">GET</option>
+              <option value="post">POST</option>
+            </select></span>
+          <input id="callbackUrl" type="text" placeholder="Callback URL" class="form-control"/>
+        </div>
+      </div>
+    </div>
+    <!--.row
+    .col-md-3
+      .form-group
+        label.sr-only HTTP Method
+        input#httpMethod.form-control(type='text', list='httpMethodList', placeholder='Method')
+    .col-md-9
+      .form-group
+        label.sr-only Callback URL
+        input#callbackUrl.form-control(type='text', placeholder='Callback URL')
+        
+    -->
+  </form>
+  <datalist id="httpMethodList">
+    <option value="GET">GET</option>
+    <option value="POST">POST</option>
+  </datalist>
+</div>
+          
+            
+
+
+          </div>
+        </section>
+
+        <!--  -->
+
+        <script src="/js/tok3n-signup.js"></script>
+    </body>
+</html>

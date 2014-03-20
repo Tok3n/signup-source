@@ -1,16 +1,20 @@
 body
   background: #eee
 
+.content
+  position: relative
+
+.row
+  margin-top: 1em
+
 html.flexbox
 
   .main
-    +display-box()
-    display: flex
-    align-items: center
-    justify-content: center
+    +display-flex
+    +justify-content($justification: "center")
+    +align-items($alignment: "center")
     min-height: 100vh
-    margin-top: 15px
-    margin-bottom: 15px
+    margin: 1rem auto 2rem
 
   .content
     @extend .well
@@ -18,23 +22,36 @@ html.flexbox
     padding: 3rem 4rem 4rem
     border: 1px solid #ddd
     background: #fff
-    // @media (min-width: $screen-sm)
-    //   margin-top: 2rem
-    //   margin-bottom: 2rem
+    margin-bottom: 0
+    position: relative
+    @media (max-width: $screen-md)
+      padding: 3rem 2rem
+    @media (max-width: $screen-sm)
+      padding: 2rem 1rem
+    @media (max-width: $screen-xs)
+      padding: 1rem 0
+
 
 h2
   margin-top: 22px
   margin-bottom: 22px
 
 .signup-form
-  .row
-    margin-top: 1em
   input,
   .btn,
+  .lrg
     @media (min-width: $screen-sm)
       font-weight: 300
       height: auto
       font-size: 150%
+
+// .content
+//   @media (min-width: $screen-sm)
+//     font-weight: 300
+//     height: auto
+//     .btn,
+//     input
+//       font-size: 1em
 
 .info-box
   margin-bottom: 1rem
@@ -58,3 +75,25 @@ h2
     @media (min-width: $screen-sm)
       font-size: 150%
       padding: 11px
+
+.signup-progress-wrapper
+  position: absolute
+  width: 100%
+  left: 0
+  bottom: 0
+  .signup-progress-bar
+    +flex-progress-bar($todo-color: $gray-light, $done-color: $brand-success)
+    font-size: 2rem
+    margin-bottom: 0
+    @media (max-width: $screen-md)
+      font-size: 1.75rem
+    @media (max-width: $screen-sm)
+      font-size: 1.5rem
+    @media (max-width: $screen-xs)
+      font-size: 1.25rem
+    li,
+    li:before,
+    li:after
+      border-bottom: 1px solid rgba(51, 51, 51, .5)
+
+

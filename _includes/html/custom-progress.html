@@ -1,0 +1,20 @@
+{% assign item_count = [1, 2, 3] %}
+
+{% if page.progress_value > -1 %}  
+  <div class="signup-progress-wrapper">
+    <ol class="signup-progress-bar">
+      {% for item in site.data.progress %}
+
+        {% assign item_class = "progress-bar__item" %}
+
+        {% if page.progress_value >= forloop.index %}
+          {% capture item_class %}{{ item_class | append: " progress-bar__item--done" }}{% endcapture %}
+        {% endif %}
+
+        <li class="{{ item_class }}"></li>
+
+      {% endfor %}
+    </ol>
+  </div>
+
+{% endif %}

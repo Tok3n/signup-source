@@ -1,0 +1,43 @@
+| ---
+| layout: default
+| title: Confirmation
+| ---
+
+.view-wrapper#appSetup1
+  
+  .container-fluid.info-box
+    h2.text-center.text-weight-light
+      | Set up your first app
+      span.subtitle
+        | Improve your application security now
+
+  form.container-fluid.signup-form
+    .row
+      .col-md-12
+        .form-group
+          label.sr-only(for='applicationName') Application Name
+          input#applicationName.form-control(type='text', placeholder='Application name')
+    
+    .row
+      .form-group
+        .input-group
+          span.input-group-addon.input-group-addon-select
+            select(required='required')
+              option(value='', disabled='disabled') Method ▾
+              option(value='get') GET
+              option(value='post') POST
+          input#callbackUrl.form-control(type='text', placeholder='Callback URL')
+    
+    //.row
+      .col-md-3
+        .form-group
+          label.sr-only HTTP Method
+          input#httpMethod.form-control(type='text', list='httpMethodList', placeholder='Method')
+      .col-md-9
+        .form-group
+          label.sr-only Callback URL
+          input#callbackUrl.form-control(type='text', placeholder='Callback URL')
+
+  datalist#httpMethodList
+    option(value='GET') GET
+    option(value='POST') POST
