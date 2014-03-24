@@ -8,9 +8,9 @@
 ## Jekyll Project Structure
 Jekyll builds projects from component parts into a static HTML site, which is in the **_site** directory. Don't edit any files in there, they'll get overwritten each time Jekyll builds. A leading underscore in a file or folder name indicates to Jekyll to not output that file/directory into the generated _site. 
 
-Jekyll uses the (Liquid)[] templating engine. The most important Liquid feature used here is `{% include %}`. The include directive looks in _includes for files that match. So {% include css/styles.css %} will look for that file path *within the _includes directory*. 
+Jekyll uses the [Liquid](http://liquidmarkup.org/) templating engine. The most important Liquid feature used here is `{% include %}`. The include directive looks in _includes for files that match. So {% include css/styles.css %} will look for that file path *within the _includes directory*. 
 
-This is a little unexpected: for files *outside* the _includes directory, you need to have (YAML frontmatter)[] which indicates to Jekyll that the file should be parsed with Liquid. For files that really don't have any frontmatter, you need to have at least the following at the start of the file:
+This is a little unexpected: for files *outside* the _includes directory, you need to have [YAML front matter](http://jekyllrb.com/docs/frontmatter/) which indicates to Jekyll that the file should be parsed with Liquid. For files that really don't have any front matter, you need to have at least the following at the start of the file:
 ```
 ---
 ---
