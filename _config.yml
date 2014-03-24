@@ -2,3 +2,4 @@ name: Tok3n Developer Sign Up
 baseurl: /tok3n-signup/
 markdown: redcarpet
 pygments: true
+exclude: [node_modules]

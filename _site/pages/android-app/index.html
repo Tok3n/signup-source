@@ -8,9 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
         
         <!-- This stylesheet uses includes to pull everything together -->
-        <link rel="stylesheet" href="/tok3n-signup/css/styles.css">
+        <link rel="stylesheet" href="/css/styles.css">
 
-        <script src="/tok3n-signup/js/modernizr.js"></script>
+        <script src="/js/modernizr.js"></script>
 
     </head>
     <body>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"><a href="/tok3n-signup/pages/verify-phone" role="button" class="btn btn-success btn-block btn-lg">Ok, Got It!</a></div>
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"><a href="/pages/verify-phone" role="button" class="btn btn-success btn-block btn-lg">Ok, Got It!</a></div>
     </div>
   </div>
 </div>
@@ -41,36 +41,14 @@
             
 
   
-  <div class="signup-progress-wrapper">
-    <ol class="signup-progress-bar">
-      
 
-        
-
-        
-          
-        
-
-        <li class="progress-bar__item progress-bar__item--done"></li>
-
-      
-
-        
-
-        
-
-        <li class="progress-bar__item"></li>
-
-      
-
-        
-
-        
-
-        <li class="progress-bar__item"></li>
-
-      
-    </ol>
+  <div class="progress-component">
+    <div class="progress__status">
+      <p>Step 2 of 4</p>
+    </div>
+    <div class="progress__indicator">
+      <div class="progress__bar" role="progress-bar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="4" style="width: 50%">
+    </div>
   </div>
 
 
@@ -79,6 +57,6 @@
 
         <!--  -->
 
-        <script src="/tok3n-signup/js/tok3n-signup.js"></script>
+        <script src="/js/tok3n-signup.js"></script>
     </body>
 </html>

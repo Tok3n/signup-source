@@ -242,5 +242,5 @@
     "Zimbabwe":"263"
   };
 
-}( jQuery )
+}( jQuery );
 

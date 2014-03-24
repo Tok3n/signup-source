@@ -19,14 +19,15 @@
           input#applicationName.form-control(type='text', placeholder='Application name')
     
     .row
-      .form-group
-        .input-group
-          span.input-group-addon.input-group-addon-select
-            select(required='required')
-              option(value='', disabled='disabled') Method ▾
-              option(value='get') GET
-              option(value='post') POST
-          input#callbackUrl.form-control(type='text', placeholder='Callback URL')
+      .col-md-12
+        .form-group
+          .input-group
+            span.input-group-addon.input-group-addon-select
+              select.twbs-focus(required='required')
+                option(value='', disabled='disabled') Method ▾
+                option(value='get') GET
+                option(value='post') POST
+            input#callbackUrl.form-control(type='text', placeholder='Callback URL')
     
     //.row
       .col-md-3

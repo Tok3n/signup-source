@@ -1,7 +1,14 @@
-{% if page.progress_value > 0 %}  
-  <div class="progress-wrapper">
-    <div class="progress">
-      <div class="progress-bar" role="progress-bar" aria-valuenow="{{ page.progress_value }}" aria-valuemin="0" aria-valuemax="100%" style="width: {{ page.progress_value}}%;">
+{% assign max_value = 4 %}
+
+{% if page.progress_value > -1 %}  
+
+  <div class="progress-component">
+    <div class="progress__status">
+      <p>Step {{ page.progress_value | plus: 1 }} of {{ max_value }}</p>
+    </div>
+    <div class="progress__indicator">
+      <div class="progress__bar" role="progress-bar" aria-valuenow="{{ page.progress_value }}" aria-valuemin="0" aria-valuemax="{{ max_value }}" style="width: {{ page.progress_value | plus: 1 | times: 100 | divided_by: max_value }}%">
     </div>
   </div>
+
 {% endif %}
