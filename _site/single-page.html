@@ -8,9 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
         
         <!-- This stylesheet uses includes to pull everything together -->
-        <link rel="stylesheet" href="/tok3n-signup/css/styles.css">
+        <link rel="stylesheet" href="/signup-source/css/styles.css">
 
-        <script src="/tok3n-signup/js/modernizr.js"></script>
+        <script src="/signup-source/js/modernizr.js"></script>
         <script type="text/javascript" src="//use.typekit.net/kus5izm.js"></script>
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     </head>
@@ -93,7 +93,7 @@
         <div class="form-group">
           <label for="phoneNumber" class="sr-only">Phone Number</label>
           <div class="input-group"><span id="phoneNumberCountryCode" class="input-group-addon">+1</span>
-            <input id="phoneNumber" type="phone" placeholder="Phone number" class="form-control"/>
+            <input id="phoneNumberInput" type="phone" placeholder="Phone number" class="form-control"/>
           </div>
         </div>
       </div>
@@ -378,7 +378,7 @@
       <div class="col-md-6 col-sm-6">
         <div class="form-group">
           <label class="sr-only">Confirmation code</label>
-          <input type="phone" placeholder="Confirmation code" class="form-control text-center"/>
+          <input id="confirmationCodeInput" type="phone" placeholder="Confirmation code" class="form-control text-center"/>
         </div>
       </div>
       <div class="col-md-6 col-sm-6">
@@ -429,8 +429,7 @@
   </div>
 </div>
 
-  
-<div id="androidApp" class="view-wrapper">
+  <div id="androidApp" class="view-wrapper">
   <div class="container-fluid signup-form">
     <div class="row">
       <div class="col-md-12">
@@ -573,6 +572,6 @@
 
         <!--  -->
 
-        <script src="/tok3n-signup/js/tok3n-signup.js"></script>
+        <script src="/signup-source/js/tok3n-signup.js"></script>
     </body>
 </html>
