@@ -9,18 +9,19 @@
       .col-md-6
         .form-group
           label.sr-only(for="countrySelect") Country
-          input.form-control#countrySelect(type='text', list='countrySelectList', placeholder="Country")
+          input.form-control#countrySelect(type='text', list='countrySelectList', placeholder="Country", required)
       .col-md-6
         .form-group
           label.sr-only(for='phoneNumber') Phone Number
           .input-group
             span#phoneNumberCountryCode.input-group-addon +1
-            input#phoneNumberInput.form-control(type='phone', placeholder='Phone number')
+            input#phoneNumberInput.form-control(type='phone', placeholder='Phone number', required)
     
     .row
       .col-md-6.col-md-offset-3
-        a.btn.btn-success.btn-block.btn-lg(href='#confirmCode', role='button') Text Me
-    
+        //- a.btn.btn-success.btn-block.btn-lg(href='#confirmCode', role='button') Text Me
+        button.btn.btn-success.btn-block.btn-lg#confirmCodeButton(data-hash='#confirmCode', role='button') Text Me
+
     .row
       .col-md-12
         p.text-center.text-subtle-regular

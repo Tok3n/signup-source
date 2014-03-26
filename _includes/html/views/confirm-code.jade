@@ -13,10 +13,11 @@
       .col-md-6.col-sm-6
         .form-group
           label.sr-only Confirmation code
-          input.form-control.text-center#confirmationCodeInput(type='phone', placeholder='Confirmation code')
+          input.form-control.text-center#confirmCodeInput(type='tel', placeholder='Confirmation code', inputmode='numeric', maxlength='6', required)
       .col-md-6.col-sm-6
         .form-group
-          a.btn.btn-success.btn-block(href='#signupComplete', role='button') Go
+          //- a.btn.btn-success.btn-block(href='#signupComplete', role='button') Go
+          button.btn.btn-success.btn-block#signupCompleteButton(data-hash='#signupComplete', role='button') Go
 
     .row
       p.text-center.text-subtle-regular

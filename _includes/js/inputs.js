@@ -4,7 +4,7 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   (function(root) {
-    var Base, CheckableComponent, InputCollection, InputComponent, InputFactory, SelectComponent, camelize;
+    var Base, ButtonComponent, CheckableComponent, InputCollection, InputComponent, InputFactory, SelectComponent, camelize;
     camelize = function(str) {
       var camel;
       camel = str.replace(/(?:^|[-_ ])(\w)/g, function(_, c) {
@@ -26,9 +26,10 @@
 
       Base.prototype.value = function() {
         if (arguments.length) {
-          return this._setValue(arguments);
+          this._setValue(arguments);
+          return this;
         } else {
-          if (this._hasValue() && this.validate()) {
+          if (this._hasValue() && this.isValid()) {
             return this._getValue();
           } else {
             return false;
@@ -40,12 +41,26 @@
         return this.value(arguments);
       };
 
-      Base.prototype.validate = function() {
+      Base.prototype.isValid = function() {
         return this.el.checkValidity();
       };
 
       Base.prototype.isFocused = function() {
         return document.activeElement === this.el;
+      };
+
+      Base.prototype.isDisabled = function() {
+        return this.el.disabled;
+      };
+
+      Base.prototype.disable = function() {
+        this.el.disabled = true;
+        return this;
+      };
+
+      Base.prototype.enable = function() {
+        this.el.disabled = false;
+        return this;
       };
 
       Base.prototype._hasValue = function() {
@@ -71,10 +86,11 @@
         }
         listener = listener.bind(this);
         this.el.addEventListener(type, listener, useCapture);
-        return this.listeners.push({
+        this.listeners.push({
           type: type,
           listener: listener
         });
+        return this;
       };
 
       Base.prototype.removeEventListener = function(type, listener, useCapture) {
@@ -82,16 +98,27 @@
           useCapture = false;
         }
         this.el.removeEventListener(type, listener, useCapture);
-        return listener;
+        return this;
       };
 
       Base.prototype.dispatchEvent = function(event) {
-        return this.el.dispatchEvent(event);
+        this.el.dispatchEvent(event);
+        return this;
       };
 
       return Base;
 
     })();
+    ButtonComponent = (function(_super) {
+      __extends(ButtonComponent, _super);
+
+      function ButtonComponent(el) {
+        ButtonComponent.__super__.constructor.call(this, el);
+      }
+
+      return ButtonComponent;
+
+    })(Base);
     InputComponent = (function(_super) {
       __extends(InputComponent, _super);
 
@@ -110,11 +137,17 @@
       }
 
       CheckableComponent.prototype.check = function() {
-        return this._switch(true);
+        this._switch(true);
+        return this;
       };
 
       CheckableComponent.prototype.uncheck = function() {
-        return this._switch(false);
+        this._switch(false);
+        return this;
+      };
+
+      CheckableComponent.prototype.isChecked = function() {
+        return this.el.checked;
       };
 
       CheckableComponent.prototype._switch = function(bool) {
@@ -123,10 +156,6 @@
           this.dispatchEvent(new Event("change"));
         }
         return this.isChecked();
-      };
-
-      CheckableComponent.prototype.isChecked = function() {
-        return this.el.checked;
       };
 
       CheckableComponent.prototype.value = function() {
@@ -196,6 +225,9 @@
         if (typeof el === "string") {
           return self.add(document.querySelectorAll(el));
         }
+        if (el instanceof InputCollection) {
+          return self.push(el);
+        }
         if (el.length) {
           return Array.prototype.forEach.call(el, function(e) {
             return self.add(e);
@@ -209,13 +241,13 @@
       };
 
       InputCollection.prototype.value = function() {
-        var input, results, val;
+        var component, results, val;
         results = (function() {
           var _i, _len, _results;
           _results = [];
           for (_i = 0, _len = this.length; _i < _len; _i++) {
-            input = this[_i];
-            if (val = input.value()) {
+            component = this[_i];
+            if (val = component.value()) {
               _results.push(val);
             }
           }
@@ -233,12 +265,12 @@
       };
 
       InputCollection.prototype.hashValue = function() {
-        var input, results, val, _i, _len;
+        var component, results, val, _i, _len;
         results = {};
         for (_i = 0, _len = this.length; _i < _len; _i++) {
-          input = this[_i];
-          val = input.value();
-          results[camelize(input.id)] = val || "";
+          component = this[_i];
+          val = component.value();
+          results[camelize(component.id)] = val || "";
         }
         if (Object.keys(results).length) {
           return results;
@@ -251,28 +283,49 @@
         return this.hashValue(arguments);
       };
 
+      InputCollection.prototype.isValid = function() {
+        var component, _i, _len;
+        for (_i = 0, _len = this.length; _i < _len; _i++) {
+          component = this[_i];
+          if (!component.isValid()) {
+            return false;
+          }
+        }
+        return true;
+      };
+
       InputCollection.prototype.addEventListener = function(type, listener, useCapture) {
-        var input, _i, _len, _results;
+        var component, _i, _len, _results;
         if (useCapture == null) {
           useCapture = false;
         }
         _results = [];
         for (_i = 0, _len = this.length; _i < _len; _i++) {
-          input = this[_i];
-          _results.push(input.addEventListener(type, listener.bind(this), useCapture));
+          component = this[_i];
+          _results.push(component.addEventListener(type, listener.bind(this), useCapture));
         }
         return _results;
       };
 
-      InputCollection.prototype.inputById = function(id) {
-        var input, _i, _len;
+      InputCollection.prototype.dispatchEvent = function(type) {
+        var component, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = this.length; _i < _len; _i++) {
+          component = this[_i];
+          _results.push(component.dispatchEvent(type));
+        }
+        return _results;
+      };
+
+      InputCollection.prototype.componentById = function(id) {
+        var component, _i, _len;
         if (id.charAt(0) === "#") {
           id = id.slice(1);
         }
         for (_i = 0, _len = this.length; _i < _len; _i++) {
-          input = this[_i];
-          if (input.id === id) {
-            return input;
+          component = this[_i];
+          if (component.id === id) {
+            return component;
           }
         }
         return false;
@@ -315,10 +368,11 @@
       var classMatcher, constructor;
       classMatcher = {
         input: {
-          radio: CheckableComponent,
-          checkbox: CheckableComponent
+          checkbox: CheckableComponent,
+          radio: CheckableComponent
         },
-        select: SelectComponent
+        select: SelectComponent,
+        button: ButtonComponent
       };
       if (typeof el === "string") {
         el = document.querySelectorAll(el);
@@ -336,6 +390,9 @@
           case "select":
             constructor = classMatcher.select;
             return new constructor(el);
+          case "button":
+            constructor = classMatcher.button;
+            return new constructor(el);
           default:
             console.warn("Invalid element passed to InputFactory");
             return false;
@@ -347,6 +404,7 @@
       InputComponent: InputComponent,
       SelectComponent: SelectComponent,
       CheckableComponent: CheckableComponent,
+      ButtonComponent: ButtonComponent,
       InputCollection: InputCollection,
       InputFactory: InputFactory
     };

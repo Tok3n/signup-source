@@ -10,9 +10,6 @@ do ( root = do ->
       return if c then c.toUpperCase() else ""
     return camel.charAt(0).toLowerCase() + camel.slice(1)
 
-
-
-
   class Base
     constructor : ( el ) ->
       this.el = el
@@ -22,18 +19,30 @@ do ( root = do ->
 
     value : ->
       if arguments.length
-        return this._setValue( arguments )
+        this._setValue( arguments )
+        return this
       else
-        return if this._hasValue() and this.validate() then this._getValue() else false
+        return if this._hasValue() and this.isValid() then this._getValue() else false
 
     values : ->
       return this.value( arguments )
 
-    validate : ->
+    isValid : ->
       return this.el.checkValidity()
 
     isFocused : ->
       return document.activeElement is this.el
+
+    isDisabled : ->
+      return this.el.disabled
+
+    disable : ->
+      this.el.disabled = true
+      return this
+
+    enable : ->
+      this.el.disabled = false
+      return this
 
     _hasValue : ->
       return !!this.el.value
@@ -54,44 +63,50 @@ do ( root = do ->
       this.listeners.push
         type: type
         listener: listener
+      return this
+
 
     removeEventListener : ( type, listener, useCapture = false ) ->
       this.el.removeEventListener( type, listener, useCapture )
-      return listener
+      return this
 
     dispatchEvent : ( event ) ->
       this.el.dispatchEvent( event )
+      return this
 
 
+
+
+  class ButtonComponent extends Base
+    constructor : ( el ) ->
+      super( el )
 
 
   class InputComponent extends Base
     constructor : ( el ) ->
       super( el )
-
-
-
-  # This class is used for inputs matching [type="radio"] or [type="checkbox"]
-  # It provides methods for getting 
+ 
   class CheckableComponent extends Base
 
     constructor : ( el ) ->
       super( el )
 
     check : -> 
-      return this._switch( true )
+      this._switch( true )
+      return this
 
     uncheck : ->
-      return this._switch( false )
+      this._switch( false )
+      return this
+
+    isChecked : ->
+      return this.el.checked
 
     _switch : ( bool ) ->
       if typeof bool is "undefined" or this.isChecked() isnt bool
         this.el.checked = !this.el.checked
         this.dispatchEvent new Event "change"
       return this.isChecked()
-
-    isChecked : ->
-      return this.el.checked
 
     value : ->
       if arguments.length
@@ -135,6 +150,9 @@ do ( root = do ->
       if typeof el is "string"
         return self.add document.querySelectorAll( el )
 
+      if el instanceof InputCollection
+        return self.push el
+
       # If it's an array-like object (jQuery, NodeList), iterate over it
       if el.length
         return Array.prototype.forEach.call el, ( e ) ->
@@ -147,7 +165,7 @@ do ( root = do ->
       return false
 
     value : ->
-      results = ( val for input in this when val = input.value() )
+      results = ( val for component in this when val = component.value() )
       return if results.length then results else false
 
     values : ->
@@ -155,22 +173,30 @@ do ( root = do ->
 
     hashValue : ->
       results = {}
-      for input in this  
-        val = input.value()
-        results[camelize(input.id)] = val or ""
+      for component in this  
+        val = component.value()
+        results[camelize(component.id)] = val or ""
       return if Object.keys(results).length then results else false
 
     hashValues : ->
       return this.hashValue( arguments )
 
+    isValid : ->
+      for component in this
+        return false unless component.isValid()
+      return true
+
     addEventListener : ( type, listener, useCapture = false ) ->
-      input.addEventListener( type, listener.bind( this ), useCapture ) for input in this
+      component.addEventListener( type, listener.bind( this ), useCapture ) for component in this
     
-    inputById : ( id ) ->
+    dispatchEvent : ( type ) ->
+      component.dispatchEvent( type ) for component in this
+
+    componentById : ( id ) ->
       if id.charAt( 0 ) is "#"
         id = id.slice( 1 )
-      for input in this
-        return input if input.id is id
+      for component in this
+        return component if component.id is id
       return false
 
     check : ( param ) ->
@@ -194,11 +220,30 @@ do ( root = do ->
 
 
   InputFactory = ( el ) ->
+     
+    # matchedClass = ( el ) ->
+
+    #   lookup =       
+    #     "button" : ButtonComponent
+    #     "select" : SelectComponent
+    #     "input[type='radio']" : CheckableComponent
+    #     "input[type='checkbox']" : CheckableComponent
+
+    #   matchAgainst = ( el, selector ) ->
+    #     return ( el.matches or el.matchesSelector or el.msMatchesSelector or el.mozMatchesSelector or el.webkitMatchesSelector or el.oMatchesSelector ).call( el, selector )
+
+    #   for selector, cl of lookup
+    #     if matchAgainst( el, selector ) is true
+    #       return cl
+
+    #   return false
+
     classMatcher =
       input :
+        checkbox : CheckableComponent
         radio : CheckableComponent
-        checkbox: CheckableComponent
       select : SelectComponent
+      button : ButtonComponent
 
     if typeof el is "string"
       el = document.querySelectorAll( el )
@@ -215,9 +260,13 @@ do ( root = do ->
         when "select"
           constructor = classMatcher.select
           return new constructor( el )
+        when "button"
+          constructor = classMatcher.button
+          return new constructor( el )
         else
           console.warn( "Invalid element passed to InputFactory" ) 
           return false
+
 
   # InputBuilder = ( opts ) ->
 
@@ -262,5 +311,6 @@ do ( root = do ->
     InputComponent : InputComponent
     SelectComponent : SelectComponent
     CheckableComponent : CheckableComponent
+    ButtonComponent : ButtonComponent
     InputCollection : InputCollection
     InputFactory : InputFactory

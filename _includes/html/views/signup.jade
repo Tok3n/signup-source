@@ -8,16 +8,16 @@
       .col-md-6
         .form-group
           label.sr-only(for='firstNameInput') First Name
-          input#firstNameInput.form-control(type='text', placeholder='First name')
+          input#firstNameInput.form-control(type='text', placeholder='First name', required)
       .col-md-6
         .form-group
           label.sr-only(for='lastNameInput') Last name
-          input#lastNameInput.form-control(type='text', placeholder='Last name')
+          input#lastNameInput.form-control(type='text', placeholder='Last name', required)
     .row
       .col-md-12
         .form-group
           label.sr-only(for='emailInput') Email address
-          input#emailInput.form-control(type='email', placeholder='Email address')
+          input#emailInput.form-control(type='email', placeholder='Email address', required)
     //- .row
     //-   .col-md-6
     //-     .form-group
@@ -33,18 +33,15 @@
         .form-group
           h3.text-center.text-weight-light Choose a verification option
           .btn-group.btn-group-table(data-toggle="buttons")
-            label.btn.btn-default
-              | SMS Message
-              input(type="radio" name="signupOptions" id="signupSms")
-            label.btn.btn-default
-              | iOS App
-              input(type="radio" name="signupOptions" id="signupIos")
-            label.btn.btn-default
-              | Andriod App
-              input(type="radio" name="signupOptions" id="signupAndroid")
+            label.btn.btn-default.active SMS Message
+              input(type="radio", name="signupOptions", id="sendCode", value="sendCode", checked)
+            label.btn.btn-default iOS App
+              input(type="radio", name="signupOptions", id="iosApp", value="iosApp")
+            label.btn.btn-default Andriod App
+              input(type="radio", name="signupOptions", id="iosApp", value="androidApp")
 
     .row
       .col-md-6.col-md-offset-3
         p.text-center
-          a.btn.btn-success.btn-lg.btn-block(href='#sendCode', role='button')
-            | Get Started
+          //- a.btn.btn-success.btn-lg.btn-block(href='#sendCode', role='button') Get Started
+          button.btn.btn-success.btn-lg.btn-block#sendCodeButton(data-hash='#sendCode', role='button') Get Started

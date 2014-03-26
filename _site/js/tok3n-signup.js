@@ -129,7 +129,7 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   (function(root) {
-    var Base, CheckableComponent, InputCollection, InputComponent, InputFactory, SelectComponent, camelize;
+    var Base, ButtonComponent, CheckableComponent, InputCollection, InputComponent, InputFactory, SelectComponent, camelize;
     camelize = function(str) {
       var camel;
       camel = str.replace(/(?:^|[-_ ])(\w)/g, function(_, c) {
@@ -151,9 +151,10 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
 
       Base.prototype.value = function() {
         if (arguments.length) {
-          return this._setValue(arguments);
+          this._setValue(arguments);
+          return this;
         } else {
-          if (this._hasValue() && this.validate()) {
+          if (this._hasValue() && this.isValid()) {
             return this._getValue();
           } else {
             return false;
@@ -165,12 +166,26 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
         return this.value(arguments);
       };
 
-      Base.prototype.validate = function() {
+      Base.prototype.isValid = function() {
         return this.el.checkValidity();
       };
 
       Base.prototype.isFocused = function() {
         return document.activeElement === this.el;
+      };
+
+      Base.prototype.isDisabled = function() {
+        return this.el.disabled;
+      };
+
+      Base.prototype.disable = function() {
+        this.el.disabled = true;
+        return this;
+      };
+
+      Base.prototype.enable = function() {
+        this.el.disabled = false;
+        return this;
       };
 
       Base.prototype._hasValue = function() {
@@ -196,10 +211,11 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
         }
         listener = listener.bind(this);
         this.el.addEventListener(type, listener, useCapture);
-        return this.listeners.push({
+        this.listeners.push({
           type: type,
           listener: listener
         });
+        return this;
       };
 
       Base.prototype.removeEventListener = function(type, listener, useCapture) {
@@ -207,16 +223,27 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
           useCapture = false;
         }
         this.el.removeEventListener(type, listener, useCapture);
-        return listener;
+        return this;
       };
 
       Base.prototype.dispatchEvent = function(event) {
-        return this.el.dispatchEvent(event);
+        this.el.dispatchEvent(event);
+        return this;
       };
 
       return Base;
 
     })();
+    ButtonComponent = (function(_super) {
+      __extends(ButtonComponent, _super);
+
+      function ButtonComponent(el) {
+        ButtonComponent.__super__.constructor.call(this, el);
+      }
+
+      return ButtonComponent;
+
+    })(Base);
     InputComponent = (function(_super) {
       __extends(InputComponent, _super);
 
@@ -235,11 +262,17 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
       }
 
       CheckableComponent.prototype.check = function() {
-        return this._switch(true);
+        this._switch(true);
+        return this;
       };
 
       CheckableComponent.prototype.uncheck = function() {
-        return this._switch(false);
+        this._switch(false);
+        return this;
+      };
+
+      CheckableComponent.prototype.isChecked = function() {
+        return this.el.checked;
       };
 
       CheckableComponent.prototype._switch = function(bool) {
@@ -248,10 +281,6 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
           this.dispatchEvent(new Event("change"));
         }
         return this.isChecked();
-      };
-
-      CheckableComponent.prototype.isChecked = function() {
-        return this.el.checked;
       };
 
       CheckableComponent.prototype.value = function() {
@@ -321,6 +350,9 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
         if (typeof el === "string") {
           return self.add(document.querySelectorAll(el));
         }
+        if (el instanceof InputCollection) {
+          return self.push(el);
+        }
         if (el.length) {
           return Array.prototype.forEach.call(el, function(e) {
             return self.add(e);
@@ -334,13 +366,13 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
       };
 
       InputCollection.prototype.value = function() {
-        var input, results, val;
+        var component, results, val;
         results = (function() {
           var _i, _len, _results;
           _results = [];
           for (_i = 0, _len = this.length; _i < _len; _i++) {
-            input = this[_i];
-            if (val = input.value()) {
+            component = this[_i];
+            if (val = component.value()) {
               _results.push(val);
             }
           }
@@ -358,12 +390,12 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
       };
 
       InputCollection.prototype.hashValue = function() {
-        var input, results, val, _i, _len;
+        var component, results, val, _i, _len;
         results = {};
         for (_i = 0, _len = this.length; _i < _len; _i++) {
-          input = this[_i];
-          val = input.value();
-          results[camelize(input.id)] = val || "";
+          component = this[_i];
+          val = component.value();
+          results[camelize(component.id)] = val || "";
         }
         if (Object.keys(results).length) {
           return results;
@@ -376,28 +408,49 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
         return this.hashValue(arguments);
       };
 
+      InputCollection.prototype.isValid = function() {
+        var component, _i, _len;
+        for (_i = 0, _len = this.length; _i < _len; _i++) {
+          component = this[_i];
+          if (!component.isValid()) {
+            return false;
+          }
+        }
+        return true;
+      };
+
       InputCollection.prototype.addEventListener = function(type, listener, useCapture) {
-        var input, _i, _len, _results;
+        var component, _i, _len, _results;
         if (useCapture == null) {
           useCapture = false;
         }
         _results = [];
         for (_i = 0, _len = this.length; _i < _len; _i++) {
-          input = this[_i];
-          _results.push(input.addEventListener(type, listener.bind(this), useCapture));
+          component = this[_i];
+          _results.push(component.addEventListener(type, listener.bind(this), useCapture));
         }
         return _results;
       };
 
-      InputCollection.prototype.inputById = function(id) {
-        var input, _i, _len;
+      InputCollection.prototype.dispatchEvent = function(type) {
+        var component, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = this.length; _i < _len; _i++) {
+          component = this[_i];
+          _results.push(component.dispatchEvent(type));
+        }
+        return _results;
+      };
+
+      InputCollection.prototype.componentById = function(id) {
+        var component, _i, _len;
         if (id.charAt(0) === "#") {
           id = id.slice(1);
         }
         for (_i = 0, _len = this.length; _i < _len; _i++) {
-          input = this[_i];
-          if (input.id === id) {
-            return input;
+          component = this[_i];
+          if (component.id === id) {
+            return component;
           }
         }
         return false;
@@ -440,10 +493,11 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
       var classMatcher, constructor;
       classMatcher = {
         input: {
-          radio: CheckableComponent,
-          checkbox: CheckableComponent
+          checkbox: CheckableComponent,
+          radio: CheckableComponent
         },
-        select: SelectComponent
+        select: SelectComponent,
+        button: ButtonComponent
       };
       if (typeof el === "string") {
         el = document.querySelectorAll(el);
@@ -461,6 +515,9 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
           case "select":
             constructor = classMatcher.select;
             return new constructor(el);
+          case "button":
+            constructor = classMatcher.button;
+            return new constructor(el);
           default:
             console.warn("Invalid element passed to InputFactory");
             return false;
@@ -472,6 +529,7 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
       InputComponent: InputComponent,
       SelectComponent: SelectComponent,
       CheckableComponent: CheckableComponent,
+      ButtonComponent: ButtonComponent,
       InputCollection: InputCollection,
       InputFactory: InputFactory
     };
@@ -906,7 +964,10 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
       }
       view = switcher.selectView(name);
       if (view) {
-        return switcher(name);
+        switcher(name);
+      }
+      if (name === "confirmCode") {
+        return $(".tel-num").html(App.phoneData.componentById("phoneNumberInput").value());
       }
     });
     tockOptions = {
@@ -928,28 +989,58 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
     });
     return switcher.on("renderComplete", function(event, name, view) {
       if (name === "confirmCode") {
-        return timer.start(120000);
+        return timer.start(120500);
       }
     });
   })();
 
   (function() {
-    var InputCollection, inputs, signupRadio, userData;
+    var InputCollection, accountData, buttons, confirmCode, firstPage, phoneData, sendCodeButton, sendTextButton, signupRadio;
     InputCollection = InputJS.InputCollection;
-    inputs = [];
-    inputs.push(document.querySelector("#firstNameInput"));
-    inputs.push(document.querySelector("#lastNameInput"));
-    inputs.push(document.querySelector("#emailInput"));
-    inputs.push(document.querySelector("#countrySelect"));
-    inputs.push(document.querySelector("#phoneNumberInput"));
+    accountData = [];
+    accountData.push(document.querySelector("#firstNameInput"));
+    accountData.push(document.querySelector("#lastNameInput"));
+    accountData.push(document.querySelector("#emailInput"));
+    App.accountData = accountData = new InputCollection(accountData);
     App.signupRadio = signupRadio = new InputCollection(document.querySelectorAll("[name='signupOptions']"));
-    App.userData = userData = new InputCollection(inputs);
-    App.userData.addEventListener("change", function(event) {
-      return console.log(JSON.stringify(this.hashValues()));
+    signupRadio.isValid = function() {
+      return this.values().length > 0;
+    };
+    sendCodeButton = new InputJS.ButtonComponent(document.querySelector("#sendCodeButton"));
+    sendCodeButton.disable();
+    App.firstPage = firstPage = new InputCollection([accountData, signupRadio]);
+    firstPage.addEventListener("change", function(event) {
+      if (this.isValid()) {
+        return sendCodeButton.enable();
+      }
     });
-    return App.signupRadio.addEventListener("change", function(event) {
-      return console.log(this.value());
+    sendCodeButton.addEventListener("click", function(event) {
+      event.preventDefault();
+      return location.hash = "#" + signupRadio.value()[0];
     });
+    buttons = document.querySelectorAll("button[data-hash]");
+    Array.prototype.forEach.call(buttons, function(button) {
+      if (button === sendCodeButton.el) {
+        return;
+      }
+      return button.addEventListener("click", function(event) {
+        event.preventDefault();
+        return location.hash = this.attributes["data-hash"].value;
+      });
+    });
+    sendTextButton = new InputJS.ButtonComponent(document.querySelector("#confirmCodeButton"));
+    sendTextButton.disable();
+    phoneData = [];
+    phoneData.push(document.querySelector("#countrySelect"));
+    phoneData.push(document.querySelector("#phoneNumberInput"));
+    App.phoneData = phoneData = new InputCollection(phoneData);
+    phoneData.addEventListener("change", function(event) {
+      console.log("phoneData change");
+      if (this.isValid()) {
+        return sendTextButton.enable();
+      }
+    });
+    return confirmCode = InputJS.InputFactory(document.querySelector("#confirmCodeInput"));
   })();
 
 }).call(this);

@@ -26,6 +26,10 @@ window.Signup = do ->
     if view
       switcher( name )
 
+    # specific instructions for rendering specific pages
+    if name is "confirmCode"
+      $(".tel-num").html( App.phoneData.componentById( "phoneNumberInput" ).value() )
+
   # Set up the confirm code countdown
   tockOptions =
     countdown: true,
@@ -45,24 +49,62 @@ window.Signup = do ->
 
   switcher.on "renderComplete", ( event, name, view ) ->
     if name is "confirmCode"
-      timer.start( 120000 )
+      timer.start( 120500 )
 
 do ->
   InputCollection = InputJS.InputCollection
 
-  inputs = []
-  inputs.push document.querySelector "#firstNameInput"
-  inputs.push document.querySelector "#lastNameInput"
-  inputs.push document.querySelector "#emailInput"
-  inputs.push document.querySelector "#countrySelect"
-  inputs.push document.querySelector "#phoneNumberInput"
-
+  # Read the forms on the first page.
+  accountData = []
+  accountData.push document.querySelector "#firstNameInput"
+  accountData.push document.querySelector "#lastNameInput"
+  accountData.push document.querySelector "#emailInput"
+  App.accountData = accountData = new InputCollection( accountData )
   App.signupRadio = signupRadio = new InputCollection document.querySelectorAll "[name='signupOptions']"
+  
+  signupRadio.isValid = ->
+    return this.values().length > 0
 
-  App.userData = userData = new InputCollection inputs
+  sendCodeButton = new InputJS.ButtonComponent document.querySelector "#sendCodeButton"
+  sendCodeButton.disable()
 
-  App.userData.addEventListener "change", ( event ) ->
-    console.log JSON.stringify this.hashValues()
+  App.firstPage = firstPage = new InputCollection [ accountData, signupRadio ]
+  firstPage.addEventListener "change", ( event ) ->
+    if this.isValid()
+      sendCodeButton.enable()
 
-  App.signupRadio.addEventListener "change", ( event ) ->
-    console.log this.value()
+  sendCodeButton.addEventListener "click", ( event ) ->
+    event.preventDefault()
+    location.hash = "#" + signupRadio.value()[0]
+
+
+  # Attach event handlers to all buttons.
+  buttons = document.querySelectorAll( "button[data-hash]" )
+  Array.prototype.forEach.call buttons, ( button ) ->
+    return if button is sendCodeButton.el
+    button.addEventListener "click", ( event ) ->
+      event.preventDefault()
+      location.hash = this.attributes["data-hash"].value
+
+  sendTextButton = new InputJS.ButtonComponent document.querySelector "#confirmCodeButton"
+  sendTextButton.disable()
+
+  # Read forms on the country/phone page
+  phoneData = []
+  phoneData.push document.querySelector "#countrySelect"
+  phoneData.push document.querySelector "#phoneNumberInput"
+  App.phoneData = phoneData = new InputCollection( phoneData )
+  
+  phoneData.addEventListener "change", ( event ) ->
+    console.log "phoneData change"
+    if this.isValid()
+      sendTextButton.enable()
+
+
+  # Read form on the 
+
+  
+  confirmCode = InputJS.InputFactory( document.querySelector( "#confirmCodeInput" ) )
+  
+    
+

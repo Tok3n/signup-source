@@ -13,11 +13,13 @@
       <div class="col-md-6 col-sm-6">
         <div class="form-group">
           <label class="sr-only">Confirmation code</label>
-          <input id="confirmationCodeInput" type="phone" placeholder="Confirmation code" class="form-control text-center"/>
+          <input id="confirmCodeInput" type="tel" placeholder="Confirmation code" inputmode="numeric" maxlength="6" required="required" class="form-control text-center"/>
         </div>
       </div>
       <div class="col-md-6 col-sm-6">
-        <div class="form-group"><a href="#signupComplete" role="button" class="btn btn-success btn-block">Go</a></div>
+        <div class="form-group">
+          <button id="signupCompleteButton" data-hash="#signupComplete" role="button" class="btn btn-success btn-block">Go</button>
+        </div>
       </div>
     </div>
     <div class="row">

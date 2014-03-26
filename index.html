@@ -1,10 +1,23 @@
 ---
-layout: default
-title: Tok3n Landing Page
+layout: single-page
+title: Developer Signup
 ---
+<div class="view-wrapper-inner">
+  {% include html/views/signup.html %}
 
-<p class="text-center">
-  <a href="{{ site.baseurl }}pages/signup" role="button" class="btn btn-success btn-lg">
-    Sign Up For Tok3n
-  </a>
-</p>
+  {% include html/views/send-code.html %}
+
+  {% include html/views/confirm-code.html %}
+
+  {% include html/views/signup-complete.html %}
+
+  {% include html/views/ios-app.html %}
+
+  {% include html/views/android-app.html %}
+
+  {% include html/views/verify-phone.html %}
+
+  {% include html/views/app-setup-v1.html %}
+
+  {% include html/views/app-setup-v2.html %}
+</div>

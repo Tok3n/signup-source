@@ -8,13 +8,13 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="firstNameInput" class="sr-only">First Name</label>
-          <input id="firstNameInput" type="text" placeholder="First name" class="form-control"/>
+          <input id="firstNameInput" type="text" placeholder="First name" required="required" class="form-control"/>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="lastNameInput" class="sr-only">Last name</label>
-          <input id="lastNameInput" type="text" placeholder="Last name" class="form-control"/>
+          <input id="lastNameInput" type="text" placeholder="Last name" required="required" class="form-control"/>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="emailInput" class="sr-only">Email address</label>
-          <input id="emailInput" type="email" placeholder="Email address" class="form-control"/>
+          <input id="emailInput" type="email" placeholder="Email address" required="required" class="form-control"/>
         </div>
       </div>
     </div>
@@ -31,14 +31,14 @@
         <div class="form-group">
           <h3 class="text-center text-weight-light">Choose a verification option</h3>
           <div data-toggle="buttons" class="btn-group btn-group-table">
-            <label class="btn btn-default">SMS Message
-              <input type="radio" name="signupOptions" id="signupSms"/>
+            <label class="btn btn-default active">SMS Message
+              <input type="radio" name="signupOptions" id="sendCode" value="sendCode" checked="checked"/>
             </label>
             <label class="btn btn-default">iOS App
-              <input type="radio" name="signupOptions" id="signupIos"/>
+              <input type="radio" name="signupOptions" id="iosApp" value="iosApp"/>
             </label>
             <label class="btn btn-default">Andriod App
-              <input type="radio" name="signupOptions" id="signupAndroid"/>
+              <input type="radio" name="signupOptions" id="iosApp" value="androidApp"/>
             </label>
           </div>
         </div>
@@ -46,7 +46,9 @@
     </div>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <p class="text-center"><a href="#sendCode" role="button" class="btn btn-success btn-lg btn-block">Get Started</a></p>
+        <p class="text-center">
+          <button id="sendCodeButton" data-hash="#sendCode" role="button" class="btn btn-success btn-lg btn-block">Get Started</button>
+        </p>
       </div>
     </div>
   </form>

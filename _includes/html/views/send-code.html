@@ -8,20 +8,22 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="countrySelect" class="sr-only">Country</label>
-          <input id="countrySelect" type="text" list="countrySelectList" placeholder="Country" class="form-control"/>
+          <input id="countrySelect" type="text" list="countrySelectList" placeholder="Country" required="required" class="form-control"/>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="phoneNumber" class="sr-only">Phone Number</label>
           <div class="input-group"><span id="phoneNumberCountryCode" class="input-group-addon">+1</span>
-            <input id="phoneNumberInput" type="phone" placeholder="Phone number" class="form-control"/>
+            <input id="phoneNumberInput" type="phone" placeholder="Phone number" required="required" class="form-control"/>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 col-md-offset-3"><a href="#confirmCode" role="button" class="btn btn-success btn-block btn-lg">Text Me</a></div>
+      <div class="col-md-6 col-md-offset-3">
+        <button id="confirmCodeButton" data-hash="#confirmCode" role="button" class="btn btn-success btn-block btn-lg">Text Me</button>
+      </div>
     </div>
     <div class="row">
       <div class="col-md-12">

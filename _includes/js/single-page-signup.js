@@ -22,7 +22,10 @@
       }
       view = switcher.selectView(name);
       if (view) {
-        return switcher(name);
+        switcher(name);
+      }
+      if (name === "confirmCode") {
+        return $(".tel-num").html(App.phoneData.componentById("phoneNumberInput").value());
       }
     });
     tockOptions = {
@@ -44,28 +47,58 @@
     });
     return switcher.on("renderComplete", function(event, name, view) {
       if (name === "confirmCode") {
-        return timer.start(120000);
+        return timer.start(120500);
       }
     });
   })();
 
   (function() {
-    var InputCollection, inputs, signupRadio, userData;
+    var InputCollection, accountData, buttons, confirmCode, firstPage, phoneData, sendCodeButton, sendTextButton, signupRadio;
     InputCollection = InputJS.InputCollection;
-    inputs = [];
-    inputs.push(document.querySelector("#firstNameInput"));
-    inputs.push(document.querySelector("#lastNameInput"));
-    inputs.push(document.querySelector("#emailInput"));
-    inputs.push(document.querySelector("#countrySelect"));
-    inputs.push(document.querySelector("#phoneNumberInput"));
+    accountData = [];
+    accountData.push(document.querySelector("#firstNameInput"));
+    accountData.push(document.querySelector("#lastNameInput"));
+    accountData.push(document.querySelector("#emailInput"));
+    App.accountData = accountData = new InputCollection(accountData);
     App.signupRadio = signupRadio = new InputCollection(document.querySelectorAll("[name='signupOptions']"));
-    App.userData = userData = new InputCollection(inputs);
-    App.userData.addEventListener("change", function(event) {
-      return console.log(JSON.stringify(this.hashValues()));
+    signupRadio.isValid = function() {
+      return this.values().length > 0;
+    };
+    sendCodeButton = new InputJS.ButtonComponent(document.querySelector("#sendCodeButton"));
+    sendCodeButton.disable();
+    App.firstPage = firstPage = new InputCollection([accountData, signupRadio]);
+    firstPage.addEventListener("change", function(event) {
+      if (this.isValid()) {
+        return sendCodeButton.enable();
+      }
     });
-    return App.signupRadio.addEventListener("change", function(event) {
-      return console.log(this.value());
+    sendCodeButton.addEventListener("click", function(event) {
+      event.preventDefault();
+      return location.hash = "#" + signupRadio.value()[0];
     });
+    buttons = document.querySelectorAll("button[data-hash]");
+    Array.prototype.forEach.call(buttons, function(button) {
+      if (button === sendCodeButton.el) {
+        return;
+      }
+      return button.addEventListener("click", function(event) {
+        event.preventDefault();
+        return location.hash = this.attributes["data-hash"].value;
+      });
+    });
+    sendTextButton = new InputJS.ButtonComponent(document.querySelector("#confirmCodeButton"));
+    sendTextButton.disable();
+    phoneData = [];
+    phoneData.push(document.querySelector("#countrySelect"));
+    phoneData.push(document.querySelector("#phoneNumberInput"));
+    App.phoneData = phoneData = new InputCollection(phoneData);
+    phoneData.addEventListener("change", function(event) {
+      console.log("phoneData change");
+      if (this.isValid()) {
+        return sendTextButton.enable();
+      }
+    });
+    return confirmCode = InputJS.InputFactory(document.querySelector("#confirmCodeInput"));
   })();
 
 }).call(this);
