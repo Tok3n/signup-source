@@ -1,0 +1,84 @@
+@mixin progress-meter($points, $ball-size, $text-size, $border)
+
+  // Adjust if you wish
+  $line-height: 3 * $text-size
+
+  // Magic constants
+  $line-height-done: 1.15
+  $line-height-todo: .95
+  $todo-size: $ball-size * .90
+  $done-adjust: 1.05
+  $todo-adjust: 1.05
+
+  padding-bottom: $ball-size / 2
+  list-style-type: none
+  li
+    display: inline-block
+    text-align: center
+    text-indent: $ball-size * -1
+    height: $line-height
+    width: (100% / $points) - 0.01%
+    font-size: $text-size
+    border-bottom-width: $border
+    border-bottom-style: solid
+    &:before
+      position: relative
+      float: left
+      text-indent: 0
+      +experimental-value(left, calc(50% - #{($ball-size/2)}))
+    &.done
+      font-size: $text-size
+      &:before
+        content: "\2713"
+        height: $ball-size
+        width: $ball-size
+        line-height: $ball-size * $line-height-done
+        bottom: ($line-height - (($border + $ball-size)/2)) * -1 * $done-adjust
+        border: none
+        border-radius: $ball-size
+    &.todo
+      font-size: $text-size
+      &:before
+        content: "\2B24"
+        font-size: $todo-size
+        bottom: ($line-height - (($border + $ball-size)/2)) * -1 * $todo-adjust
+        line-height: $ball-size * $line-height-todo
+
+///////////////////
+// Example usage //
+///////////////////
+
+// ol.progress-meter
+//   +progress-meter($points: 4, $ball-size: 19px, $text-size: 12px, $border: 4px)
+//   +user-select(none)
+//   li
+//     &.done
+//       color: black
+//       border-bottom-color: yellowgreen
+//       &:before
+//         color: white
+//         background-color: yellowgreen
+//     &.todo
+//       color: silver
+//       border-bottom-color: silver
+//       &:before
+//         color: silver
+
+///////////////////
+// Example usage //
+///////////////////
+
+// ol.progress-meter
+//   +progress-meter($points: 4, $ball-size: 19px, $text-size: 12px, $border: 4px)
+//   li
+//     &.done
+//       color: black
+//       border-bottom-color: yellowgreen
+//       &:before
+//         color: white
+//         background-color: yellowgreen
+//     &.todo
+//       color: silver
+//       border-bottom-color: silver
+//       &:before
+//         color: silver

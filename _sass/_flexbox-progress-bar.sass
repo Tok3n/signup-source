@@ -1,0 +1,28 @@
+=flex-progress-bar($todo-color, $done-color)
+  list-style-type: none
+  padding-left: 0
+  display: flex
+  .progress-bar__item
+    flex: 1
+    position: relative
+    height: .25em
+    background: $todo-color
+    &:after,
+    &:first-of-type:before
+      content: ""
+      position: absolute
+      width: 1em
+      height: 1em
+      border-radius: 1em
+      background: $todo-color
+      top: -.375em
+      z-index: 100
+    &:after
+      right: -.5em
+    &:first-of-type:before
+      background: $done-color
+      left: -.5em
+  .progress-bar__item--done
+    background: $done-color
+    &:after
+      background: $done-color

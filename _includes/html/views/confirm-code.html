@@ -1,0 +1,29 @@
+
+<div id="confirmCode" class="view-wrapper">
+  <div class="container-fluid info-box">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center text-weight-light">Please enter the code you receive</h2>
+        <p class="text-large">We sent a code to <span class="tel-num">123 555-4567</span>. If it doesn't arrive in <span class="code-countdown"></span>, try to resend or select an alternative authentication mode.</p>
+      </div>
+    </div>
+  </div>
+  <form class="container-fluid signup-form">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <div class="form-group">
+          <label class="sr-only">Confirmation code</label>
+          <input id="confirmCodeInput" type="tel" placeholder="Confirmation code" inputmode="numeric" maxlength="6" required="required" class="form-control text-center"/>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="form-group">
+          <button id="signupCompleteButton" data-hash="#signupComplete" role="button" class="btn btn-success btn-block">Go</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <p class="text-center text-subtle-regular"><span class="block">Didn't receive a code? <a href="#">Resend it</a></span><span class="block">or authenticate with a <a href="#">QR code</a> or <a href="#">phone call</a>.</span></p>
+    </div>
+  </form>
+</div>

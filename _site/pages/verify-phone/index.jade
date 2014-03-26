@@ -1,0 +1,27 @@
+| ---
+| layout: default
+| title: Verify With Tok3n for iOS
+| progress_value: 2
+| ---
+
+.view-wrapper#verifyPhone
+
+  .container-fluid.signup-form
+    .row
+      .col-md-12
+        h2.text-center.text-weight-light
+          | Link Your Device
+
+        figure
+          img.tok3n-qr-code(src="")
+          figcaption
+            p Scan this code with the Tok3n mobile app.
+            p This page will refresh automatically when your code is confirmed.
+
+    //- .row
+    //-   .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+    //-     a.btn.btn-success.btn-block.btn-lg(href='{{ site.baseurl }}pages/verify-phone', role='button') Ok, Got It!
+    
+    .row
+      .col-md-12
+        p Stuck? We can send you an <a href="{{ site.baseurl }}pages/send-code">SMS message</a> to verify your phone number.  

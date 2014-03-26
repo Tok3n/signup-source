@@ -4,12 +4,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{{ page.title }}</title>
-        <meta name="viewport" content="width=device-width">
 
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+        
         <!-- This stylesheet uses includes to pull everything together -->
-        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="{{ site.baseurl }}css/styles.css">
 
-        <script src="js/modernizr.js"></script>
+        <script src="{{ site.baseurl }}js/modernizr.js"></script>
 
     </head>
     <body>
@@ -21,11 +22,12 @@
             
             {{ content }}
           
+            {% include html/bootstrap-progress.html %}
           </div>
         </section>
 
         <!-- {% include html/footer.html %} -->
 
-        <script src="js/tok3n-signup.js"></script>
+        <script src="{{ site.baseurl }}js/tok3n-signup.js"></script>
     </body>
 </html>

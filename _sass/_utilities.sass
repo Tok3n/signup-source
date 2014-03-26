@@ -1,3 +1,4 @@
+// text font weight
 .text-weight-xlight
   font-weight: 100
 
@@ -13,6 +14,10 @@
 .text-weight-xbold
   font-weight: 900
 
+
+
+
+// text coloring
 .text-subtle-min
   color: rgba(51, 51, 51, .75)
 
@@ -22,6 +27,10 @@
 .text-subtle-max
   color: rgba(51, 51, 51, .35)
 
+
+
+
+// text display
 .block
   display: block
 
@@ -30,3 +39,94 @@
 
 .inline-block
   display: inline-block
+
+
+
+// subtitles
+.subtitle
+  @extend .block
+  @extend .text-weight-bold
+  margin-top: .5em
+  font-size: .5em
+
+// similar to usual form focus
+.twbs-focus:focus
+  border: 1px solid #66afe9
+  outline: 0
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6)
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6)
+
+// padding & margin helpers
+$xs-m-p: .25rem
+$sm-m-p: .5rem
+$md-m-p: 1rem
+$lg-m-p: 2rem
+$xl-m-p: 4rem
+
+// vertical padding
+.vpxs
+  padding-top: $xs-m-p
+  padding-bottom: $xs-m-p
+.vpsm
+  padding-top: $sm-m-p
+  padding-bottom: $sm-m-p
+.vpmd
+  padding-top: $md-m-p
+  padding-bottom: $md-m-p
+.vplg
+  padding-top: $lg-m-p
+  padding-bottom: $lg-m-p
+.vpxl
+  padding-top: $xl-m-p
+  padding-bottom: $xl-m-p
+
+// horizontal padding
+.hpxs
+  padding-left: $xs-m-p
+  padding-right: $xs-m-p
+.hpsm
+  padding-left: $sm-m-p
+  padding-right: $sm-m-p
+.hpmd
+  padding-left: $md-m-p
+  padding-right: $md-m-p
+.hplg
+  padding-left: $lg-m-p
+  padding-right: $lg-m-p
+.hpxl
+  padding-left: $xl-m-p
+  padding-right: $xl-m-p
+
+// vertical margins
+.vmxs
+  margin-top: $xs-m-p
+  margin-bottom: $xs-m-p
+.vmsm
+  margin-top: $sm-m-p
+  margin-bottom: $sm-m-p
+.vmmd
+  margin-top: $md-m-p
+  margin-bottom: $md-m-p
+.vmlg
+  margin-top: $lg-m-p
+  margin-bottom: $lg-m-p
+.vmxl
+  margin-top: $xl-m-p
+  margin-bottom: $xl-m-p
+
+// horizontal margmns
+.hmxs
+  margin-left: $xs-m-p
+  margin-right: $xs-m-p
+.hmsm
+  margin-left: $sm-m-p
+  margin-right: $sm-m-p
+.hmmd
+  margin-left: $md-m-p
+  margin-right: $md-m-p
+.hmlg
+  margin-left: $lg-m-p
+  margin-right: $lg-m-p
+.hmxl
+  margin-left: $xl-m-p
+  margin-right: $xl-m-p
