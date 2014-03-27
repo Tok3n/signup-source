@@ -76,7 +76,7 @@ do ->
   sendCodeButton.disable()
 
   App.firstPage = firstPage = new InputCollection [ accountData, signupRadio ]
-  firstPage.addEventListener "change", ( event ) ->
+  firstPage.addEventListener "keyup", ( event ) ->
     if this.isValid()
       sendCodeButton.enable()
 
@@ -107,14 +107,13 @@ do ->
     console.log ( value = this.value() )
     match = App.countryData.filter ( country ) ->
       return country.englishName is value
-
-    console.log match
-
-    if match
+    if match.length
       phoneNumberInput.placeholder( match[0].example )
       document.querySelector( "#phoneNumberCountryCode" ).innerHTML = "+#{match[0].phoneCode}"
 
-  # Read form on the 
+  phoneNumberInput.addEventListener "keyup", ( event ) ->
+    if phoneData.isValid()
+      sendTextButton.enable()
 
   
   confirmCode = InputFactory( "#confirmCodeInput" )

@@ -780,7 +780,7 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
     sendCodeButton = new InputJS.ButtonComponent(document.querySelector("#sendCodeButton"));
     sendCodeButton.disable();
     App.firstPage = firstPage = new InputCollection([accountData, signupRadio]);
-    firstPage.addEventListener("change", function(event) {
+    firstPage.addEventListener("keyup", function(event) {
       if (this.isValid()) {
         return sendCodeButton.enable();
       }
@@ -811,10 +811,14 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
       match = App.countryData.filter(function(country) {
         return country.englishName === value;
       });
-      console.log(match);
-      if (match) {
+      if (match.length) {
         phoneNumberInput.placeholder(match[0].example);
         return document.querySelector("#phoneNumberCountryCode").innerHTML = "+" + match[0].phoneCode;
+      }
+    });
+    phoneNumberInput.addEventListener("keyup", function(event) {
+      if (phoneData.isValid()) {
+        return sendTextButton.enable();
       }
     });
     return confirmCode = InputFactory("#confirmCodeInput");
