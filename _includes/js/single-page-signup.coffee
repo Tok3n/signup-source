@@ -1,4 +1,10 @@
-window.Signup = do ->
+$ ->
+
+  $.ajax 
+    url: "json/country-phone-data.json"
+    cache: false
+  .done ( data ) ->
+    App.countryData = data
 
   appInitialView = "#signupHome"
 
@@ -53,6 +59,7 @@ window.Signup = do ->
 
 do ->
   InputCollection = InputJS.InputCollection
+  InputFactory = InputJS.InputFactory
 
   # Read the forms on the first page.
   accountData = []
@@ -91,20 +98,26 @@ do ->
 
   # Read forms on the country/phone page
   phoneData = []
-  phoneData.push document.querySelector "#countrySelect"
-  phoneData.push document.querySelector "#phoneNumberInput"
-  App.phoneData = phoneData = new InputCollection( phoneData )
+  countrySelect = InputFactory "#countrySelect"
+  phoneNumberInput = InputFactory "#phoneNumberInput"
   
-  phoneData.addEventListener "change", ( event ) ->
-    console.log "phoneData change"
-    if this.isValid()
-      sendTextButton.enable()
+  App.phoneData = phoneData = new InputCollection( [countrySelect, phoneNumberInput] )
 
+  countrySelect.addEventListener "change", ( event ) ->
+    console.log ( value = this.value() )
+    match = App.countryData.filter ( country ) ->
+      return country.englishName is value
+
+    console.log match
+
+    if match
+      phoneNumberInput.placeholder( match[0].example )
+      document.querySelector( "#phoneNumberCountryCode" ).innerHTML = "+#{match[0].phoneCode}"
 
   # Read form on the 
 
   
-  confirmCode = InputJS.InputFactory( document.querySelector( "#confirmCodeInput" ) )
+  confirmCode = InputFactory( "#confirmCodeInput" )
   
     
 

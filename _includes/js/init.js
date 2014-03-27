@@ -3,5 +3,5 @@
 
   window.App = {}
 
-}( jQuery )
+}( jQuery );
 

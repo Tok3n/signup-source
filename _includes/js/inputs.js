@@ -126,6 +126,15 @@
         InputComponent.__super__.constructor.call(this, el);
       }
 
+      InputComponent.prototype.placeholder = function(param) {
+        if (param) {
+          this.el.placeholder = param;
+          return this;
+        } else {
+          return this.el.placeholder;
+        }
+      };
+
       return InputComponent;
 
     })(Base);
@@ -236,7 +245,11 @@
         if (el instanceof Node) {
           return self.push(InputFactory(el));
         }
+        if (el instanceof Base) {
+          return self.push(el);
+        }
         console.warn("Improper param passed to InputCollection::add");
+        console.log(el);
         return false;
       };
 

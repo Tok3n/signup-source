@@ -85,6 +85,14 @@ do ( root = do ->
   class InputComponent extends Base
     constructor : ( el ) ->
       super( el )
+
+    placeholder : ( param ) ->
+      if param
+        this.el.placeholder = param
+        return this
+      else
+        return this.el.placeholder 
+
  
   class CheckableComponent extends Base
 
@@ -161,7 +169,11 @@ do ( root = do ->
       if el instanceof Node
         return self.push InputFactory( el )
 
+      if el instanceof Base
+        return self.push el
+
       console.warn "Improper param passed to InputCollection::add"
+      console.log el
       return false
 
     value : ->
