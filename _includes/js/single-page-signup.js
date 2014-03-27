@@ -77,6 +77,8 @@
     firstPage.addEventListener("keyup", function(event) {
       if (this.isValid()) {
         return sendCodeButton.enable();
+      } else {
+        return sendCodeButton.disable();
       }
     });
     sendCodeButton.addEventListener("click", function(event) {
@@ -113,6 +115,8 @@
     phoneNumberInput.addEventListener("keyup", function(event) {
       if (phoneData.isValid()) {
         return sendTextButton.enable();
+      } else {
+        return sendTextButton.disable();
       }
     });
     return confirmCode = InputFactory("#confirmCodeInput");

@@ -79,6 +79,9 @@ do ->
   firstPage.addEventListener "keyup", ( event ) ->
     if this.isValid()
       sendCodeButton.enable()
+    else
+      sendCodeButton.disable()
+
 
   sendCodeButton.addEventListener "click", ( event ) ->
     event.preventDefault()
@@ -114,7 +117,8 @@ do ->
   phoneNumberInput.addEventListener "keyup", ( event ) ->
     if phoneData.isValid()
       sendTextButton.enable()
-
+    else
+      sendTextButton.disable()
   
   confirmCode = InputFactory( "#confirmCodeInput" )
   
