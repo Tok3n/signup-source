@@ -1,7 +1,5 @@
 body
-  background: #eee
-
-
+  // background: #eee
 
 .content,
 .view-wrapper
@@ -29,12 +27,13 @@ body
     margin: 1rem auto 2rem
 
   .content
-    @extend .well
+    // @extend .well
     @extend .col-md-8
+    float: none
     padding: 3rem 4rem 4rem
-    border: 1px solid #ddd
+    // border: 1px solid #ddd
     background: #fff
-    margin-bottom: 0
+    margin: 0 auto
     position: relative
     @media (max-width: $screen-md)
       padding: 3rem 2rem
@@ -117,14 +116,14 @@ h2
   .main
     display: block
     min-height: 100vh
-    margin: 1rem auto 2rem
+    margin: 0 auto 2rem
   .content
-    @extend .well
+    // @extend .well
     @extend .col-md-8
     padding: 3rem 4rem 4rem
-    border: 1px solid #ddd
+    // border: 1px solid #ddd
     background: #fff
-    margin-bottom: 0
+    margin: 0 auto
     position: relative
     @media (max-width: $screen-md)
       padding: 3rem 2rem
@@ -132,5 +131,6 @@ h2
       padding: 2rem 1rem
     @media (max-width: $screen-xs)
       padding: 1rem 0
-
+  h1
+    margin-top: 0
 

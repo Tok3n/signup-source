@@ -1,0 +1,48 @@
+$tok3n-blue: #31B3D4
+$tok3n-purple: #2b3087
+
+.tok3n-header
+  height: 5rem
+  background-image: linear-gradient(color-stops(adjust-lightness($tok3n-purple, 12) 10%, adjust-lightness($tok3n-purple, 25) 100%))
+  background-position: top
+  background-repeat: repeat-x
+
+.tok3n-logo
+  height: 5rem
+  color: white(.8)
+  text-align: center
+  font-size: 8em
+  line-height: 0
+
+.icon-tok3n-logo:before
+  color: #fff
+  position: relative
+  top: -2.5rem
+
+.tok3n-button-wrapper
+  margin: 0 auto
+  button
+    margin: 0 auto
+    @extend %btn
+    @extend %btn-lg
+    @extend %btn-block
+    @extend .ladda-button
+    @extend .ladda-button[data-style=zoom-in]
+    +button-variant(hsla(0, 0, 100%, .95), adjust-lightness($tok3n-purple, 25), black(.1))
+
+.icon-tok3n-stripe
+  font-size: 2.42em
+  position: absolute
+  margin-top: -12px
+  margin-left: -23px
+  color: hsl(358, 70%, 60%)
+  +letterpress(black(.4))
+  +single-transition(color, .3s, ease-in-out)
+  &:hover, &:focus, &:active
+    color: hsl(358, 70%, 50%)
+
+.tok3n-button-text
+  -webkit-font-smoothing: antialiased
+
+.icon-tok3n-stripe + .tok3n-button-text
+  margin-left: 2em

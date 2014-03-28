@@ -6689,7 +6689,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 }
 
 /* line 7, ../../../../../../../../.rvm/gems/ruby-2.0.0-p451@global/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_wells.scss */
-.well, .flexbox .content, .single-page-signup .content {
+.well {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
@@ -6700,7 +6700,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 /* line 15, ../../../../../../../../.rvm/gems/ruby-2.0.0-p451@global/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_wells.scss */
-.well blockquote, .flexbox .content blockquote, .single-page-signup .content blockquote {
+.well blockquote {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15);
 }
@@ -7800,35 +7800,30 @@ button.close {
   margin-bottom: 2rem;
 }
 
-/* line 1, ../../../_sass/_signup.sass */
-body {
-  background: #eeeeee;
-}
-
-/* line 6, ../../../_sass/_signup.sass */
+/* line 4, ../../../_sass/_signup.sass */
 .content,
 .view-wrapper {
   position: relative;
 }
 
-/* line 11, ../../../_sass/_signup.sass */
+/* line 9, ../../../_sass/_signup.sass */
 .view-wrapper img {
   max-width: 100%;
   display: block;
   margin: 1rem auto;
 }
-/* line 15, ../../../_sass/_signup.sass */
+/* line 13, ../../../_sass/_signup.sass */
 .view-wrapper .qr-code {
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.25);
   border-radius: 0.25rem;
 }
 
-/* line 19, ../../../_sass/_signup.sass */
+/* line 17, ../../../_sass/_signup.sass */
 .row {
   margin-top: 1em;
 }
 
-/* line 24, ../../../_sass/_signup.sass */
+/* line 22, ../../../_sass/_signup.sass */
 .flexbox .main {
   display: -webkit-box;
   display: -moz-box;
@@ -7848,41 +7843,41 @@ body {
   min-height: 100vh;
   margin: 1rem auto 2rem;
 }
-/* line 31, ../../../_sass/_signup.sass */
+/* line 29, ../../../_sass/_signup.sass */
 .flexbox .content {
+  float: none;
   padding: 3rem 4rem 4rem;
-  border: 1px solid #dddddd;
   background: white;
-  margin-bottom: 0;
+  margin: 0 auto;
   position: relative;
 }
 @media (max-width: 992px) {
-  /* line 31, ../../../_sass/_signup.sass */
+  /* line 29, ../../../_sass/_signup.sass */
   .flexbox .content {
     padding: 3rem 2rem;
   }
 }
 @media (max-width: 768px) {
-  /* line 31, ../../../_sass/_signup.sass */
+  /* line 29, ../../../_sass/_signup.sass */
   .flexbox .content {
     padding: 2rem 1rem;
   }
 }
 @media (max-width: 480px) {
-  /* line 31, ../../../_sass/_signup.sass */
+  /* line 29, ../../../_sass/_signup.sass */
   .flexbox .content {
     padding: 1rem 0;
   }
 }
 
-/* line 47, ../../../_sass/_signup.sass */
+/* line 46, ../../../_sass/_signup.sass */
 h2 {
   margin-top: 22px;
   margin-bottom: 22px;
 }
 
 @media (min-width: 768px) {
-  /* line 52, ../../../_sass/_signup.sass */
+  /* line 51, ../../../_sass/_signup.sass */
   .signup-form input,
   .signup-form .btn,
   .signup-form .lrg {
@@ -7892,16 +7887,16 @@ h2 {
   }
 }
 
-/* line 68, ../../../_sass/_signup.sass */
+/* line 67, ../../../_sass/_signup.sass */
 .info-box {
   margin-bottom: 1rem;
 }
 
-/* line 71, ../../../_sass/_signup.sass */
+/* line 70, ../../../_sass/_signup.sass */
 .input-group-addon-select {
   padding: 0;
 }
-/* line 73, ../../../_sass/_signup.sass */
+/* line 72, ../../../_sass/_signup.sass */
 .input-group-addon-select select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -7912,51 +7907,54 @@ h2 {
   position: relative;
   cursor: context-menu;
 }
-/* line 83, ../../../_sass/_signup.sass */
+/* line 82, ../../../_sass/_signup.sass */
 .input-group-addon-select select:not(:valid) {
   background-color: #fcf8e3;
 }
-/* line 85, ../../../_sass/_signup.sass */
+/* line 84, ../../../_sass/_signup.sass */
 .input-group-addon-select select:valid {
   background-color: #dff0d8;
 }
 @media (min-width: 768px) {
-  /* line 73, ../../../_sass/_signup.sass */
+  /* line 72, ../../../_sass/_signup.sass */
   .input-group-addon-select select {
     font-size: 150%;
     padding: 11px;
   }
 }
 
-/* line 117, ../../../_sass/_signup.sass */
+/* line 116, ../../../_sass/_signup.sass */
 .single-page-signup .main {
   display: block;
   min-height: 100vh;
-  margin: 1rem auto 2rem;
+  margin: 0 auto 2rem;
 }
-/* line 121, ../../../_sass/_signup.sass */
+/* line 120, ../../../_sass/_signup.sass */
 .single-page-signup .content {
   padding: 3rem 4rem 4rem;
-  border: 1px solid #dddddd;
   background: white;
-  margin-bottom: 0;
+  margin: 0 auto;
   position: relative;
 }
 @media (max-width: 992px) {
-  /* line 121, ../../../_sass/_signup.sass */
+  /* line 120, ../../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 3rem 2rem;
   }
 }
 @media (max-width: 768px) {
-  /* line 121, ../../../_sass/_signup.sass */
+  /* line 120, ../../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 2rem 1rem;
   }
 }
 @media (max-width: 480px) {
-  /* line 121, ../../../_sass/_signup.sass */
+  /* line 120, ../../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 1rem 0;
   }
+}
+/* line 134, ../../../_sass/_signup.sass */
+.single-page-signup h1 {
+  margin-top: 0;
 }

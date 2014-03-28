@@ -783,6 +783,8 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
     firstPage.addEventListener("keyup", function(event) {
       if (this.isValid()) {
         return sendCodeButton.enable();
+      } else {
+        return sendCodeButton.disable();
       }
     });
     sendCodeButton.addEventListener("click", function(event) {
@@ -819,6 +821,8 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
     phoneNumberInput.addEventListener("keyup", function(event) {
       if (phoneData.isValid()) {
         return sendTextButton.enable();
+      } else {
+        return sendTextButton.disable();
       }
     });
     return confirmCode = InputFactory("#confirmCodeInput");

@@ -1,0 +1,51 @@
+@function black($opacity)
+  @return rgba(0,0,0,$opacity)
+
+@function white($opacity)
+  @return rgba(255,255,255,$opacity)
+
+@mixin letterpress($color)
+  text-shadow: $color 0 1px 0
+
+@mixin hr-image($lr-image, $hr-image)
+  background-image: image-url($lr-image)
+  @media print, (-webkit-min-device-pixel-ratio: 1.25), (-o-min-device-pixel-ratio: 5/4), (min-resolution: 120dpi)
+    background-image: image-url($hr-image)
+    background-size: image-width($lr-image) image-height($lr-image)
+
+@mixin application-columns($columns, $gutter)
+  $column-count: $columns
+  $column-gutter: $gutter
+  $column-width: ((100% - (($column-count - 1) * $column-gutter)) / $column-count) - 0.01%
+  .grid-column
+    width: $column-width
+  .grid-gutter
+    width: $column-gutter
+  .card
+    width: $column-width
+
+@mixin nr-app-size($w, $h, $gutter)
+  $card-w: $w
+  $card-h: $h
+  $card-proportion: ($card-h / $card-w) * 100%
+  $card-width: $card-w * 1px
+  $card-height: $card-h * 1px
+  .grid-gutter
+    width: $gutter
+  .card
+    width: $card-width
+  .card, .front, .back
+    height: $card-height
+  .front
+    width: $card-width
+  .back
+    width: $card-width
+  .inner
+    padding-top: $card-proportion
+
+@mixin grid-template
+  float: left
+  position: relative
+  min-height: 1px
+  padding-left: 15px
+  padding-right: 15px
