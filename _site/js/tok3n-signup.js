@@ -1336,6 +1336,9 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
   defaultTransitions = {
     exit: function(exitingView, callback) {
       this.height(this.height());
+      $("body").animate({
+        scrollTop: 0
+      }, 500);
       return exitingView.fadeOut(500, function() {
         return callback();
       });

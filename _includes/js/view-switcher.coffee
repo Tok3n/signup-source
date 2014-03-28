@@ -2,6 +2,8 @@
 defaultTransitions = 
   exit : ( exitingView, callback ) ->
     this.height( this.height() )
+    $("body").animate scrollTop: 0
+    , 500
     exitingView.fadeOut 500, ->
       callback()
 

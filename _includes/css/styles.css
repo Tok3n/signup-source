@@ -8457,17 +8457,23 @@ button.close {
   margin: 1rem auto;
 }
 /* line 13, ../../_sass/_signup.sass */
-.view-wrapper .qr-code {
+.view-wrapper .img-half {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 17, ../../_sass/_signup.sass */
+.view-wrapper .tok3n-qr-code {
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.25);
   border-radius: 0.25rem;
 }
 
-/* line 17, ../../_sass/_signup.sass */
+/* line 21, ../../_sass/_signup.sass */
 .row {
   margin-top: 1em;
 }
 
-/* line 22, ../../_sass/_signup.sass */
+/* line 26, ../../_sass/_signup.sass */
 .flexbox .main {
   display: -webkit-box;
   display: -moz-box;
@@ -8487,7 +8493,7 @@ button.close {
   min-height: 100vh;
   margin: 1rem auto 2rem;
 }
-/* line 29, ../../_sass/_signup.sass */
+/* line 33, ../../_sass/_signup.sass */
 .flexbox .content {
   float: none;
   padding: 3rem 4rem 4rem;
@@ -8496,32 +8502,32 @@ button.close {
   position: relative;
 }
 @media (max-width: 992px) {
-  /* line 29, ../../_sass/_signup.sass */
+  /* line 33, ../../_sass/_signup.sass */
   .flexbox .content {
     padding: 3rem 2rem;
   }
 }
 @media (max-width: 768px) {
-  /* line 29, ../../_sass/_signup.sass */
+  /* line 33, ../../_sass/_signup.sass */
   .flexbox .content {
     padding: 2rem 1rem;
   }
 }
 @media (max-width: 480px) {
-  /* line 29, ../../_sass/_signup.sass */
+  /* line 33, ../../_sass/_signup.sass */
   .flexbox .content {
     padding: 1rem 0;
   }
 }
 
-/* line 46, ../../_sass/_signup.sass */
+/* line 50, ../../_sass/_signup.sass */
 h2 {
   margin-top: 22px;
   margin-bottom: 22px;
 }
 
 @media (min-width: 768px) {
-  /* line 51, ../../_sass/_signup.sass */
+  /* line 55, ../../_sass/_signup.sass */
   .signup-form input,
   .signup-form .btn,
   .signup-form .lrg {
@@ -8531,16 +8537,16 @@ h2 {
   }
 }
 
-/* line 67, ../../_sass/_signup.sass */
+/* line 71, ../../_sass/_signup.sass */
 .info-box {
   margin-bottom: 1rem;
 }
 
-/* line 70, ../../_sass/_signup.sass */
+/* line 74, ../../_sass/_signup.sass */
 .input-group-addon-select {
   padding: 0;
 }
-/* line 72, ../../_sass/_signup.sass */
+/* line 76, ../../_sass/_signup.sass */
 .input-group-addon-select select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -8551,29 +8557,29 @@ h2 {
   position: relative;
   cursor: context-menu;
 }
-/* line 82, ../../_sass/_signup.sass */
+/* line 86, ../../_sass/_signup.sass */
 .input-group-addon-select select:not(:valid) {
   background-color: #fcf8e3;
 }
-/* line 84, ../../_sass/_signup.sass */
+/* line 88, ../../_sass/_signup.sass */
 .input-group-addon-select select:valid {
   background-color: #dff0d8;
 }
 @media (min-width: 768px) {
-  /* line 72, ../../_sass/_signup.sass */
+  /* line 76, ../../_sass/_signup.sass */
   .input-group-addon-select select {
     font-size: 150%;
     padding: 11px;
   }
 }
 
-/* line 116, ../../_sass/_signup.sass */
+/* line 120, ../../_sass/_signup.sass */
 .single-page-signup .main {
   display: block;
   min-height: 100vh;
   margin: 0 auto 2rem;
 }
-/* line 120, ../../_sass/_signup.sass */
+/* line 124, ../../_sass/_signup.sass */
 .single-page-signup .content {
   padding: 3rem 4rem 4rem;
   background: white;
@@ -8581,30 +8587,30 @@ h2 {
   position: relative;
 }
 @media (max-width: 992px) {
-  /* line 120, ../../_sass/_signup.sass */
+  /* line 124, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 3rem 2rem;
   }
 }
 @media (max-width: 768px) {
-  /* line 120, ../../_sass/_signup.sass */
+  /* line 124, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 2rem 1rem;
   }
 }
 @media (max-width: 480px) {
-  /* line 120, ../../_sass/_signup.sass */
+  /* line 124, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 1rem 0;
   }
 }
-/* line 134, ../../_sass/_signup.sass */
+/* line 138, ../../_sass/_signup.sass */
 .single-page-signup h1 {
   margin-top: 0;
 }
 
 @media (max-width: 480px) {
-  /* line 139, ../../_sass/_signup.sass */
+  /* line 143, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn {
     display: block;
     width: 100%;
@@ -8612,12 +8618,12 @@ h2 {
     margin: 0;
     border-bottom-width: 0;
   }
-  /* line 145, ../../_sass/_signup.sass */
+  /* line 149, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn:first-of-type {
     border-top-left-radius: 4px !important;
     border-top-right-radius: 4px !important;
   }
-  /* line 148, ../../_sass/_signup.sass */
+  /* line 152, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn:last-of-type {
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
@@ -8631,29 +8637,31 @@ h2 {
   background-image: linear-gradient(#3a41b5 10%, #646ace 100%);
   background-position: top;
   background-repeat: repeat-x;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.45);
+  z-index: 10;
+  position: relative;
 }
 
-/* line 10, ../../_sass/_header.sass */
+/* line 13, ../../_sass/_header.sass */
 .tok3n-logo {
   height: 5rem;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   font-size: 8em;
-  line-height: 0;
 }
 
-/* line 17, ../../_sass/_header.sass */
+/* line 19, ../../_sass/_header.sass */
 .icon-tok3n-logo:before {
   color: white;
   position: relative;
   top: -2.5rem;
 }
 
-/* line 22, ../../_sass/_header.sass */
+/* line 24, ../../_sass/_header.sass */
 .tok3n-button-wrapper {
   margin: 0 auto;
 }
-/* line 24, ../../_sass/_header.sass */
+/* line 26, ../../_sass/_header.sass */
 .tok3n-button-wrapper button {
   margin: 0 auto;
   color: rgba(255, 255, 255, 0.95);
@@ -8691,7 +8699,7 @@ h2 {
   background-color: rgba(255, 255, 255, 0.95);
 }
 
-/* line 33, ../../_sass/_header.sass */
+/* line 35, ../../_sass/_header.sass */
 .icon-tok3n-stripe {
   font-size: 2.42em;
   position: absolute;
@@ -8705,17 +8713,17 @@ h2 {
   -o-transition: color 0.3s ease-in-out !important;
   transition: color 0.3s ease-in-out !important;
 }
-/* line 41, ../../_sass/_header.sass */
+/* line 43, ../../_sass/_header.sass */
 .icon-tok3n-stripe:hover, .icon-tok3n-stripe:focus, .icon-tok3n-stripe:active {
   color: #d9262c;
 }
 
-/* line 44, ../../_sass/_header.sass */
+/* line 46, ../../_sass/_header.sass */
 .tok3n-button-text {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 47, ../../_sass/_header.sass */
+/* line 49, ../../_sass/_header.sass */
 .icon-tok3n-stripe + .tok3n-button-text {
   margin-left: 2em;
 }
