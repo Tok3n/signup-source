@@ -1,6 +1,6 @@
 // Come back and fix the over-specificity later.
 
-.btn-group.btn-group-table
+.btn-group-table
   @extend .btn-group-justified
   table-layout: initial
 
@@ -10,3 +10,10 @@
 .row.row--wide-spacing
   margin-top: 2rem
   margin-bottom: 2rem
+
+
+.form-control:focus
+  border-color: rgba(100, 106, 206, 1)
+  outline: 0
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(100, 106, 206, 0.6)
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(100, 106, 206, 0.6)

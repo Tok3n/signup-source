@@ -4609,22 +4609,22 @@ input[type="button"].btn-block {
 }
 
 /* line 205, ../../../../../../../.rvm/gems/ruby-2.0.0-p451@global/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-justified, .btn-group.btn-group-table {
+.btn-group-justified, .btn-group-table {
   display: table;
   width: 100%;
   table-layout: fixed;
   border-collapse: separate;
 }
 /* line 211, ../../../../../../../.rvm/gems/ruby-2.0.0-p451@global/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-justified > .btn, .btn-group.btn-group-table > .btn,
+.btn-group-justified > .btn, .btn-group-table > .btn,
 .btn-group-justified > .btn-group,
-.btn-group.btn-group-table > .btn-group {
+.btn-group-table > .btn-group {
   float: none;
   display: table-cell;
   width: 1%;
 }
 /* line 216, ../../../../../../../.rvm/gems/ruby-2.0.0-p451@global/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_button-groups.scss */
-.btn-group-justified > .btn-group .btn, .btn-group.btn-group-table > .btn-group .btn {
+.btn-group-justified > .btn-group .btn, .btn-group-table > .btn-group .btn {
   width: 100%;
 }
 
@@ -8421,7 +8421,7 @@ button.close {
 }
 
 /* line 3, ../../_sass/_twbs-additions.sass */
-.btn-group.btn-group-table {
+.btn-group-table {
   table-layout: initial;
 }
 
@@ -8434,6 +8434,14 @@ button.close {
 .row.row--wide-spacing {
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+/* line 15, ../../_sass/_twbs-additions.sass */
+.form-control:focus {
+  border-color: #646ace;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(100, 106, 206, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(100, 106, 206, 0.6);
 }
 
 /* line 4, ../../_sass/_signup.sass */
@@ -8593,6 +8601,28 @@ h2 {
 /* line 134, ../../_sass/_signup.sass */
 .single-page-signup h1 {
   margin-top: 0;
+}
+
+@media (max-width: 480px) {
+  /* line 139, ../../_sass/_signup.sass */
+  .authentication-mode-buttons.btn-group > label.btn {
+    display: block;
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    border-bottom-width: 0;
+  }
+  /* line 145, ../../_sass/_signup.sass */
+  .authentication-mode-buttons.btn-group > label.btn:first-of-type {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+  }
+  /* line 148, ../../_sass/_signup.sass */
+  .authentication-mode-buttons.btn-group > label.btn:last-of-type {
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    border-bottom-width: 1px;
+  }
 }
 
 /* line 4, ../../_sass/_header.sass */
