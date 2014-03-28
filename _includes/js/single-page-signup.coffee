@@ -1,5 +1,9 @@
 $ ->
 
+  window.addEventListener "load", ->
+      FastClick.attach(document.body)
+  , false
+
   $.ajax 
     url: "json/country-phone-data.json"
     cache: false

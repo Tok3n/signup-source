@@ -2,6 +2,9 @@
 (function() {
   $(function() {
     var appInitialView, initialViewName, switcher, timer, tockFormat, tockOptions, viewSwitcheroptions;
+    window.addEventListener("load", function() {
+      return FastClick.attach(document.body);
+    }, false);
     $.ajax({
       url: "json/country-phone-data.json",
       cache: false
