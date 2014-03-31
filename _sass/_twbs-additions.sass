@@ -1,5 +1,8 @@
 // Come back and fix the over-specificity later.
 
+.btn
+  font-weight: normal
+
 .btn-group-table
   @extend .btn-group-justified
   table-layout: initial
@@ -10,6 +13,13 @@
 .row.row--wide-spacing
   margin-top: 2rem
   margin-bottom: 2rem
+
+.btn.disabled, 
+.btn[disabled], 
+fieldset[disabled] .btn
+  opacity: 1
+  background-color: #aaa !important
+  border-color: #888 !important
 
 
 .form-control:focus

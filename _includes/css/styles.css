@@ -8421,22 +8421,36 @@ button.close {
 }
 
 /* line 3, ../../_sass/_twbs-additions.sass */
+.btn {
+  font-weight: normal;
+}
+
+/* line 6, ../../_sass/_twbs-additions.sass */
 .btn-group-table {
   table-layout: initial;
 }
 
-/* line 7, ../../_sass/_twbs-additions.sass */
+/* line 10, ../../_sass/_twbs-additions.sass */
 .btn.btn-wrap {
   white-space: normal;
 }
 
-/* line 10, ../../_sass/_twbs-additions.sass */
+/* line 13, ../../_sass/_twbs-additions.sass */
 .row.row--wide-spacing {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-/* line 15, ../../_sass/_twbs-additions.sass */
+/* line 17, ../../_sass/_twbs-additions.sass */
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  opacity: 1;
+  background-color: #aaaaaa !important;
+  border-color: #888888 !important;
+}
+
+/* line 25, ../../_sass/_twbs-additions.sass */
 .form-control:focus {
   border-color: #646ace;
   outline: 0;
@@ -8529,24 +8543,30 @@ h2 {
 @media (min-width: 768px) {
   /* line 55, ../../_sass/_signup.sass */
   .signup-form input,
-  .signup-form .btn,
-  .signup-form .lrg {
+  .signup-form .lrg,
+  .signup-form .btn {
     font-weight: 300;
     height: auto;
     font-size: 150%;
   }
 }
+@media (min-width: 768px) {
+  /* line 62, ../../_sass/_signup.sass */
+  .signup-form button.btn {
+    font-weight: normal;
+  }
+}
 
-/* line 71, ../../_sass/_signup.sass */
+/* line 74, ../../_sass/_signup.sass */
 .info-box {
   margin-bottom: 1rem;
 }
 
-/* line 74, ../../_sass/_signup.sass */
+/* line 77, ../../_sass/_signup.sass */
 .input-group-addon-select {
   padding: 0;
 }
-/* line 76, ../../_sass/_signup.sass */
+/* line 79, ../../_sass/_signup.sass */
 .input-group-addon-select select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -8557,29 +8577,29 @@ h2 {
   position: relative;
   cursor: context-menu;
 }
-/* line 86, ../../_sass/_signup.sass */
+/* line 89, ../../_sass/_signup.sass */
 .input-group-addon-select select:not(:valid) {
   background-color: #fcf8e3;
 }
-/* line 88, ../../_sass/_signup.sass */
+/* line 91, ../../_sass/_signup.sass */
 .input-group-addon-select select:valid {
   background-color: #dff0d8;
 }
 @media (min-width: 768px) {
-  /* line 76, ../../_sass/_signup.sass */
+  /* line 79, ../../_sass/_signup.sass */
   .input-group-addon-select select {
     font-size: 150%;
     padding: 11px;
   }
 }
 
-/* line 120, ../../_sass/_signup.sass */
+/* line 123, ../../_sass/_signup.sass */
 .single-page-signup .main {
   display: block;
   min-height: 100vh;
   margin: 0 auto 2rem;
 }
-/* line 124, ../../_sass/_signup.sass */
+/* line 127, ../../_sass/_signup.sass */
 .single-page-signup .content {
   padding: 3rem 4rem 4rem;
   background: white;
@@ -8587,30 +8607,30 @@ h2 {
   position: relative;
 }
 @media (max-width: 992px) {
-  /* line 124, ../../_sass/_signup.sass */
+  /* line 127, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 3rem 2rem;
   }
 }
 @media (max-width: 768px) {
-  /* line 124, ../../_sass/_signup.sass */
+  /* line 127, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 2rem 1rem;
   }
 }
 @media (max-width: 480px) {
-  /* line 124, ../../_sass/_signup.sass */
+  /* line 127, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 1rem 0;
   }
 }
-/* line 138, ../../_sass/_signup.sass */
+/* line 141, ../../_sass/_signup.sass */
 .single-page-signup h1 {
   margin-top: 0;
 }
 
 @media (max-width: 480px) {
-  /* line 143, ../../_sass/_signup.sass */
+  /* line 146, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn {
     display: block;
     width: 100%;
@@ -8618,12 +8638,12 @@ h2 {
     margin: 0;
     border-bottom-width: 0;
   }
-  /* line 149, ../../_sass/_signup.sass */
+  /* line 152, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn:first-of-type {
     border-top-left-radius: 4px !important;
     border-top-right-radius: 4px !important;
   }
-  /* line 152, ../../_sass/_signup.sass */
+  /* line 155, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn:last-of-type {
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
@@ -8648,20 +8668,26 @@ h2 {
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   font-size: 8em;
-}
-
-/* line 19, ../../_sass/_header.sass */
-.icon-tok3n-logo:before {
-  color: white;
   position: relative;
-  top: -2.5rem;
 }
 
-/* line 24, ../../_sass/_header.sass */
+/* line 20, ../../_sass/_header.sass */
+.tok3n-svg-logo {
+  position: absolute;
+  height: 80%;
+  top: 10%;
+  left: 0;
+}
+/* line 25, ../../_sass/_header.sass */
+.tok3n-svg-logo path {
+  fill: white;
+}
+
+/* line 28, ../../_sass/_header.sass */
 .tok3n-button-wrapper {
   margin: 0 auto;
 }
-/* line 26, ../../_sass/_header.sass */
+/* line 30, ../../_sass/_header.sass */
 .tok3n-button-wrapper button {
   margin: 0 auto;
   color: rgba(255, 255, 255, 0.95);
@@ -8699,7 +8725,7 @@ h2 {
   background-color: rgba(255, 255, 255, 0.95);
 }
 
-/* line 35, ../../_sass/_header.sass */
+/* line 39, ../../_sass/_header.sass */
 .icon-tok3n-stripe {
   font-size: 2.42em;
   position: absolute;
@@ -8713,17 +8739,17 @@ h2 {
   -o-transition: color 0.3s ease-in-out !important;
   transition: color 0.3s ease-in-out !important;
 }
-/* line 43, ../../_sass/_header.sass */
+/* line 47, ../../_sass/_header.sass */
 .icon-tok3n-stripe:hover, .icon-tok3n-stripe:focus, .icon-tok3n-stripe:active {
   color: #d9262c;
 }
 
-/* line 46, ../../_sass/_header.sass */
+/* line 50, ../../_sass/_header.sass */
 .tok3n-button-text {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 49, ../../_sass/_header.sass */
+/* line 53, ../../_sass/_header.sass */
 .icon-tok3n-stripe + .tok3n-button-text {
   margin-left: 2em;
 }
