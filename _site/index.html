@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Developer Signup</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
         
         <!-- This stylesheet uses includes to pull everything together -->
         <link rel="stylesheet" href="/signup-source/css/styles.css">
@@ -67,11 +67,8 @@
             <label class="btn btn-default active">SMS Message
               <input type="radio" name="signupOptions" id="sendCode" value="sendCode" checked="checked"/>
             </label>
-            <label class="btn btn-default">iOS App
-              <input type="radio" name="signupOptions" id="iosApp" value="iosApp"/>
-            </label>
-            <label class="btn btn-default">Andriod App
-              <input type="radio" name="signupOptions" id="iosApp" value="androidApp"/>
+            <label class="btn btn-default">Mobile App
+              <input type="radio" name="signupOptions" id="mobileAppRadio" value="mobileApp"/>
             </label>
           </div>
         </div>
@@ -129,7 +126,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="countrySelect" class="sr-only">Country</label>
-          <select id="countrySelect">
+          <select id="countrySelect" class="country-select">
             <option value=""></option>
             <option value="United States">United States</option>
             <option value="United Kingdom">United Kingdom</option>
@@ -667,7 +664,7 @@
     <div class="row">
       <div class="col-md-12">
         <h2 class="text-center text-weight-light">Please enter the code you receive</h2>
-        <p class="text-large">We sent a code to <span class="tel-num">123 555-4567</span>. If it doesn't arrive in <span class="code-countdown"></span>, try to resend or select an alternative authentication mode.</p>
+        <p class="text-large">We sent a code to <span class="tel-num">123 555-4567</span>. If it doesn't arrive in <span class="code-countdown">2:00</span>, try to resend or select an alternative authentication mode.</p>
       </div>
     </div>
   </div>
@@ -714,8 +711,7 @@
   </form>
 </div>
 
-  
-<div id="iosApp" class="view-wrapper">
+  <div id="mobileApp" class="view-wrapper">
   <div class="container-fluid signup-form">
     <div class="row">
       <div class="col-md-12">
@@ -735,42 +731,22 @@
 </div>
 
   
-<div id="androidApp" class="view-wrapper">
-  <div class="container-fluid signup-form">
-    <div class="row">
-      <div class="col-md-12">
-        <h2 class="text-center text-weight-light">Mobile App</h2>
-        <figure><img src="/signup-source/img/tok3n-app-hidpi.png" class="img-half tok3n-app-icon"/></figure>
-        <p class="lrg">
-          To verify your account with the Tok3n mobile app, you'll need to download the app on an iOS or Android device. On your mobile device, search for <em>Tok3n</em> in the App Store (iOS) or Google Play Store (Android). Once you're ready, hit the button below and we'll display a unique barcode. Scan the barcode with the Tok3n app and you'll be ready to go!
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <button id="verifyAndroidButton" data-hash="#verifyPhone" role="button" class="btn btn-success btn-block btn-lg">Ok, Got It!</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-  
 <div id="verifyPhone" class="view-wrapper">
   <div class="container-fluid signup-form">
     <div class="row">
       <div class="col-md-12">
         <h2 class="text-center text-weight-light">Link Your Device</h2>
-        <figure><img src="/signup-source/img/qr-code.png" class="tok3n-qr-code"/>
+        <figure class="tok3n-qr-code-fig">
+          <img src="/signup-source/img/qr-code.png" class="tok3n-qr-code"/>
           <figcaption>
-            <p class="text-large">Scan this code with the Tok3n mobile app.</p>
-            <p class="text-large">This page will refresh automatically when your code is confirmed.</p>
+            <p class="text-large text-center">Open the Tok3n mobile app on your device and scan the code above. This page will refresh automatically when your code is confirmed.</p>
           </figcaption>
         </figure>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <p>Stuck? We can send you an <a href="#sendCode">SMS message</a> to verify your phone number.  </p>
+        <p class="text-center">Stuck? We can send you an <a href="#sendCode">SMS message</a> to verify your phone number.  </p>
       </div>
     </div>
   </div>
