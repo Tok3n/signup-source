@@ -56,6 +56,7 @@ h2
   input,
   .lrg,
   .btn
+    font-size: 125%
     @media (min-width: $screen-sm)
       font-weight: 300
       height: auto
@@ -75,7 +76,8 @@ h2
 .info-box
   margin-bottom: 1rem
 
-.code-countdown
+.code-countdown,
+.tel-num
   color: #3a41b5
 
 .country-select
@@ -83,6 +85,10 @@ h2
   background: white
   font-size: 1.6rem
   max-width: 100%
+  height: 32px
+  @media (min-width: $screen-sm)
+    height: 48px
+
 
 .input-group-addon-select
   padding: 0
@@ -133,7 +139,7 @@ h2
   .main
     display: block
     min-height: 100vh
-    margin: 0 auto 2rem
+    margin: 1rem auto 2rem
   .content
     // @extend .well
     @extend .col-md-8
