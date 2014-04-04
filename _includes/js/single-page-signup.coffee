@@ -115,7 +115,7 @@ $ ->
       match = App.countryData.filter ( country ) ->
         return country.englishName is value
       if match.length
-        phoneNumberInput.placeholder( match[0].example )
+        # phoneNumberInput.placeholder( match[0].example )
         document.querySelector( "#phoneNumberCountryCode" ).innerHTML = "+#{match[0].phoneCode}"
 
     phoneNumberInput.addEventListener "keyup", ( event ) ->

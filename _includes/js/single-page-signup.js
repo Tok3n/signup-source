@@ -105,7 +105,6 @@
           return country.englishName === value;
         });
         if (match.length) {
-          phoneNumberInput.placeholder(match[0].example);
           return document.querySelector("#phoneNumberCountryCode").innerHTML = "+" + match[0].phoneCode;
         }
       });

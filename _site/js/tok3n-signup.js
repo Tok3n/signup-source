@@ -1585,7 +1585,6 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
           return country.englishName === value;
         });
         if (match.length) {
-          phoneNumberInput.placeholder(match[0].example);
           return document.querySelector("#phoneNumberCountryCode").innerHTML = "+" + match[0].phoneCode;
         }
       });
