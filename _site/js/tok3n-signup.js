@@ -1336,133 +1336,131 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
   defaultTransitions = {
     exit: function(exitingView, callback) {
       this.height(this.height());
-      $("body").animate({
-        scrollTop: 0
-      }, 500);
-      return exitingView.fadeOut(500, function() {
+      return exitingView.fadeOut(250, function() {
         return callback();
       });
     },
     prepare: function(exitingView, enteringView, callback) {
       var newHeight;
       newHeight = enteringView.outerHeight() + parseInt(this.css("padding-top"), 10) + parseInt(this.css("padding-bottom"), 10);
-      return this.animate({
+      this.animate({
         height: newHeight
-      }, 500, function() {
+      }, 250, function() {
         return callback();
       });
+      return callback();
     },
     enter: function(enteringView, callback) {
-      return enteringView.fadeIn(500, function() {
+      return enteringView.fadeIn(250, function() {
         return callback();
       });
     }
   };
 
-  (function(root) {
-    return root.ViewSwitcher = function(options) {
-      var addAllViews, attrIdentifier, container, enter, exit, finishRender, hub, initialView, initialViewName, prepare, rawViews, state, switchView, timedOffsets, useHistory, views, _off, _on, _trigger;
-      rawViews = options.views;
-      container = $(options.container);
-      attrIdentifier = options.attrIdentifier || "id";
-      initialView = options.initialView;
-      initialViewName = $(options.initialView).attr(attrIdentifier);
-      useHistory = options.useHistory;
-      timedOffsets = options.timedOffsets;
-      exit = options.exit || defaultTransitions.exit;
-      prepare = options.prepare || defaultTransitions.prepare;
-      enter = options.enter || defaultTransitions.enter;
-      views = {};
-      views.selectView = function(name) {
-        if (this[name]) {
-          return this[name];
-        } else {
-          console.error("A view named " + name + " is not registered on this ViewSwitcher");
-          return false;
-        }
-      };
-      views.addView = function(view) {
+  (function($, root) {
+    var ViewSwitcher;
+    ViewSwitcher = (function() {
+      function ViewSwitcher(options) {
+        var addAllViews, initialView, switcher;
+        this.views = {};
+        this.hub = $({});
+        this.timedOffsets = options.timedOffsets, this.container = options.container, this.defaultView = options.defaultView;
+        this.identifyingAttr = options.identifyingAttr || "id";
+        this.inTransition = false;
+        this.queue = [];
+        this.state = {
+          activeView: $(""),
+          pastViews: []
+        };
+        this.exit = options.exit || defaultTransitions.exit;
+        this.prepare = options.prepare || defaultTransitions.prepare;
+        this.enter = options.enter || defaultTransitions.enter;
+        switcher = this;
+        addAllViews = function(param) {
+          if (typeof param === "string") {
+            addAllViews($(param));
+          } else if (param instanceof Node) {
+            switcher.addView(param);
+          } else if (typeof param.length !== "undefined") {
+            [].forEach.call(param, function(e) {
+              return addAllViews(e);
+            });
+          } else {
+            console.warn("View add fall-through.");
+          }
+        };
+        addAllViews(options.views);
+        initialView = this.views[location.hash.substr(1) || this.defaultView];
+        console.log(location.hash.substr(1) || this.defaultView);
+        this.prepare.bind(this.container, this.state.activeView, initialView, this.enter.bind(this.container, initialView, this.finishRender.bind(this, initialView)))();
+      }
+
+      ViewSwitcher.prototype.addView = function(view) {
         var name;
         view = $(view);
-        name = view.attr(attrIdentifier);
-        if (this[name]) {
+        name = view.attr(this.identifyingAttr);
+        if (this.views[name]) {
           return console.error("A view or method named " + name + " is already registered on this ViewSwitcher");
         } else {
-          return views[name] = view;
+          return this.views[name] = view;
         }
       };
-      views.removeView = function(name) {
-        return this[name] = void 0;
+
+      ViewSwitcher.prototype.removeView = function(name) {
+        return this.views[name] = void 0;
       };
-      hub = $({});
-      _on = function() {
-        return hub.on.apply(hub, arguments);
+
+      ViewSwitcher.prototype.selectView = function(name) {
+        return this.views[name] || $("");
       };
-      _off = function() {
-        return hub.off.apply(hub, arguments);
-      };
-      _trigger = function() {
-        return hub.trigger.apply(hub, arguments);
-      };
-      switchView = function(incomingViewName) {
+
+      ViewSwitcher.prototype.switchTo = function(incomingViewName) {
         var boundCleanup, boundEnter, boundPrepare, incomingView;
-        incomingView = views.selectView(incomingViewName);
-        if (timedOffsets) {
-          setTimeout(exit.bind(container, incomingView, $.noop), 0);
-          setTimeout(prepare.bind(container, state.activeView, incomingView, $.noop), options.exitDelay);
-          setTimeout(enter.bind(container, incomingView, $.noop), options.exitDelay + options.prepareDelay);
-          return setTimeout(finishRender.bind(null, incomingView), options.exitDelay + options.prepareDelay + options.enterDelay);
-        } else {
-          boundCleanup = finishRender.bind(null, incomingViewName);
-          boundEnter = enter.bind(container, incomingView, boundCleanup);
-          boundPrepare = prepare.bind(container, state.activeView, incomingView, boundEnter);
-          return exit.bind(container, state.activeView, boundPrepare)();
+        incomingView = this.views[incomingViewName];
+        if (incomingView === this.state.activeView) {
+          return false;
+        }
+        if (this.inTransition) {
+          this.queue.push(incomingViewName);
+          return false;
+        }
+        this.inTransition = true;
+        boundCleanup = this.finishRender.bind(this, incomingView);
+        boundEnter = this.enter.bind(this.container, incomingView, boundCleanup);
+        boundPrepare = this.prepare.bind(this.container, this.state.activeView, incomingView, boundEnter);
+        this.exit.bind(this.container, this.state.activeView, boundPrepare)();
+        return true;
+      };
+
+      ViewSwitcher.prototype.finishRender = function(incomingView) {
+        this.state.pastViews.push(this.state.activeView);
+        this.state.activeView = incomingView;
+        this.trigger("renderComplete", {
+          view: this.state.activeView
+        });
+        this.inTransition = false;
+        if (this.queue.length) {
+          return this.switchTo(this.queue.shift());
         }
       };
-      switchView.on = _on;
-      switchView.off = _off;
-      switchView.trigger = _trigger;
-      switchView.views = function() {
-        return views;
+
+      ViewSwitcher.prototype.on = function() {
+        return this.hub.on.apply(this.hub, arguments);
       };
-      switchView.addView = function(view) {
-        return views.addView(view);
+
+      ViewSwitcher.prototype.off = function() {
+        return this.hub.off.apply(this.hub, arguments);
       };
-      switchView.selectView = function(name) {
-        return views.selectView(name);
+
+      ViewSwitcher.prototype.trigger = function() {
+        return this.hub.trigger.apply(this.hub, arguments);
       };
-      switchView.removeView = function(name) {
-        return views.removeView(name);
-      };
-      state = {
-        activeView: $(""),
-        pastViews: []
-      };
-      finishRender = function(incomingViewName) {
-        var incomingView;
-        incomingView = views.selectView(incomingViewName);
-        state.pastViews.push(state.activeView);
-        state.activeView = incomingView;
-        return _trigger("renderComplete", incomingViewName, state.activeView);
-      };
-      addAllViews = function(rawViews) {
-        if (rawViews instanceof jQuery) {
-          return rawViews.each(function() {
-            return views.addView(this);
-          });
-        } else if (rawViews instanceof Array) {
-          return rawViews.forEach(function(el) {
-            return views.addView(el);
-          });
-        } else if (rawViews.substr) {
-          return addAllViews($(rawViews));
-        }
-      };
-      addAllViews(rawViews);
-      prepare.bind(container, state.activeView, views.selectView(initialViewName), enter.bind(container, views.selectView(initialViewName), finishRender.bind(null, initialViewName)))();
-      return switchView;
-    };
-  })((function() {
+
+      return ViewSwitcher;
+
+    })();
+    return root.ViewSwitcher = ViewSwitcher;
+  })(jQuery, (function() {
     if (typeof exports !== "undefined") {
       return exports;
     } else {
@@ -1483,7 +1481,14 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
 // Generated by CoffeeScript 1.7.1
 (function() {
   $(function() {
-    var appInitialView, initialViewName, switcher, timer, tockFormat, tockOptions, viewSwitcheroptions;
+    var doSwitch, startView, switcher, timer, tockFormat, tockOptions, viewSwitcheroptions;
+    if (isMobile.apple.device) {
+      startView = "iosAppLink";
+    } else if (isMobile.android.device) {
+      startView = "androidAppLink";
+    } else {
+      startView = "signupHome";
+    }
     window.addEventListener("load", function() {
       return FastClick.attach(document.body);
     }, false);
@@ -1493,119 +1498,107 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
     }).done(function(data) {
       return App.countryData = data;
     });
-    appInitialView = "#signupHome";
-    if (location.hash === "" || location.hash === "#") {
-      initialViewName = appInitialView;
-    } else {
-      initialViewName = location.hash;
-    }
     viewSwitcheroptions = {};
     viewSwitcheroptions.views = ".view-wrapper";
-    viewSwitcheroptions.container = ".view-wrapper-inner";
-    viewSwitcheroptions.initialView = initialViewName;
-    App.switcher = switcher = ViewSwitcher(viewSwitcheroptions);
-    $(window).on("hashchange", function(event) {
-      var name, view;
-      if (location.hash === "" || location.hash === "#") {
-        name = appInitialView.substring(1);
-      } else {
-        name = location.hash.substring(1);
-      }
-      view = switcher.selectView(name);
-      if (view) {
-        switcher(name);
-      }
-      if (name === "confirmCode") {
-        return $(".tel-num").html(App.phoneData.componentById("phoneNumberInput").value());
-      }
-    });
+    viewSwitcheroptions.container = $(".view-wrapper-inner");
+    viewSwitcheroptions.defaultView = startView;
+    App.switcher = switcher = new ViewSwitcher(viewSwitcheroptions);
+    doSwitch = function() {
+      var viewName;
+      viewName = location.hash.substr(1) || viewSwitcheroptions.defaultView;
+      return switcher.switchTo(viewName);
+    };
     tockOptions = {
       countdown: true,
       interval: 500,
       callback: function() {
         return $(".code-countdown").html(tockFormat(timer.msToTime(timer.lap())));
-      },
-      complete: function() {
-        return console.log("Tock complete");
       }
     };
     tockFormat = function(rawTime) {
       return rawTime.split(".")[0].substring(1);
     };
     App.timer = timer = new Tock(tockOptions);
+    $(window).on("hashchange", function(event) {
+      return doSwitch();
+    });
     $(window).on("hashchange", function() {
       return timer.stop();
     });
-    return switcher.on("renderComplete", function(event, name, view) {
-      if (name === "confirmCode") {
+    switcher.on("renderComplete", function(event, data) {
+      if (data.view.attr("id") === "confirmCode") {
+        return $(".tel-num").html(App.phoneData.componentById("phoneNumberInput").value());
+      }
+    });
+    switcher.on("renderComplete", function(event, data) {
+      if (data.view.attr("id") === "confirmCode") {
         return timer.start(120500);
       }
     });
-  });
-
-  (function() {
-    var InputCollection, InputFactory, accountData, buttons, confirmCode, countrySelect, firstPage, phoneData, phoneNumberInput, sendCodeButton, sendTextButton, signupRadio;
-    InputCollection = InputJS.InputCollection;
-    InputFactory = InputJS.InputFactory;
-    accountData = [];
-    accountData.push(document.querySelector("#firstNameInput"));
-    accountData.push(document.querySelector("#lastNameInput"));
-    accountData.push(document.querySelector("#emailInput"));
-    App.accountData = accountData = new InputCollection(accountData);
-    App.signupRadio = signupRadio = new InputCollection(document.querySelectorAll("[name='signupOptions']"));
-    signupRadio.isValid = function() {
-      return this.values().length > 0;
-    };
-    sendCodeButton = new InputJS.ButtonComponent(document.querySelector("#sendCodeButton"));
-    sendCodeButton.disable();
-    App.firstPage = firstPage = new InputCollection([accountData, signupRadio]);
-    firstPage.addEventListener("keyup", function(event) {
-      if (this.isValid()) {
-        return sendCodeButton.enable();
-      } else {
-        return sendCodeButton.disable();
-      }
-    });
-    sendCodeButton.addEventListener("click", function(event) {
-      event.preventDefault();
-      return location.hash = "#" + signupRadio.value()[0];
-    });
-    buttons = document.querySelectorAll("button[data-hash]");
-    Array.prototype.forEach.call(buttons, function(button) {
-      if (button === sendCodeButton.el) {
-        return;
-      }
-      return button.addEventListener("click", function(event) {
+    return (function() {
+      var InputCollection, InputFactory, accountData, buttons, confirmCode, countrySelect, firstPage, phoneData, phoneNumberInput, sendCodeButton, sendTextButton, signupRadio;
+      InputCollection = InputJS.InputCollection;
+      InputFactory = InputJS.InputFactory;
+      accountData = [];
+      accountData.push(document.querySelector("#firstNameInput"));
+      accountData.push(document.querySelector("#lastNameInput"));
+      accountData.push(document.querySelector("#emailInput"));
+      App.accountData = accountData = new InputCollection(accountData);
+      App.signupRadio = signupRadio = new InputCollection(document.querySelectorAll("[name='signupOptions']"));
+      signupRadio.isValid = function() {
+        return this.values().length > 0;
+      };
+      sendCodeButton = new InputJS.ButtonComponent(document.querySelector("#sendCodeButton"));
+      sendCodeButton.disable();
+      App.firstPage = firstPage = new InputCollection([accountData, signupRadio]);
+      firstPage.addEventListener("keyup", function(event) {
+        if (this.isValid()) {
+          return sendCodeButton.enable();
+        } else {
+          return sendCodeButton.disable();
+        }
+      });
+      sendCodeButton.addEventListener("click", function(event) {
         event.preventDefault();
-        return location.hash = this.attributes["data-hash"].value;
+        return location.hash = "#" + signupRadio.value()[0];
       });
-    });
-    sendTextButton = new InputJS.ButtonComponent(document.querySelector("#confirmCodeButton"));
-    sendTextButton.disable();
-    phoneData = [];
-    countrySelect = InputFactory("#countrySelect");
-    phoneNumberInput = InputFactory("#phoneNumberInput");
-    App.phoneData = phoneData = new InputCollection([countrySelect, phoneNumberInput]);
-    countrySelect.addEventListener("change", function(event) {
-      var match, value;
-      console.log((value = this.value()));
-      match = App.countryData.filter(function(country) {
-        return country.englishName === value;
+      buttons = document.querySelectorAll("button[data-hash]");
+      Array.prototype.forEach.call(buttons, function(button) {
+        if (button === sendCodeButton.el) {
+          return;
+        }
+        return button.addEventListener("click", function(event) {
+          event.preventDefault();
+          return location.hash = this.attributes["data-hash"].value;
+        });
       });
-      if (match.length) {
-        phoneNumberInput.placeholder(match[0].example);
-        return document.querySelector("#phoneNumberCountryCode").innerHTML = "+" + match[0].phoneCode;
-      }
-    });
-    phoneNumberInput.addEventListener("keyup", function(event) {
-      if (phoneData.isValid()) {
-        return sendTextButton.enable();
-      } else {
-        return sendTextButton.disable();
-      }
-    });
-    return confirmCode = InputFactory("#confirmCodeInput");
-  })();
+      sendTextButton = new InputJS.ButtonComponent(document.querySelector("#confirmCodeButton"));
+      sendTextButton.disable();
+      phoneData = [];
+      countrySelect = InputFactory("#countrySelect");
+      phoneNumberInput = InputFactory("#phoneNumberInput");
+      App.phoneData = phoneData = new InputCollection([countrySelect, phoneNumberInput]);
+      countrySelect.addEventListener("change", function(event) {
+        var match, value;
+        console.log((value = this.value()[0]));
+        match = App.countryData.filter(function(country) {
+          return country.englishName === value;
+        });
+        if (match.length) {
+          phoneNumberInput.placeholder(match[0].example);
+          return document.querySelector("#phoneNumberCountryCode").innerHTML = "+" + match[0].phoneCode;
+        }
+      });
+      phoneNumberInput.addEventListener("keyup", function(event) {
+        if (phoneData.isValid()) {
+          return sendTextButton.enable();
+        } else {
+          return sendTextButton.disable();
+        }
+      });
+      return confirmCode = InputFactory("#confirmCodeInput");
+    })();
+  });
 
 }).call(this);
 

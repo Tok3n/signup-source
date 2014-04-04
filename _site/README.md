@@ -4,7 +4,7 @@
 1. If Jekyll and Compass aren't already installed, install them (`gem install jekyll` and `gem install compass`)
 2. In the **root** of the project, run `jekyll serve --watch --baseurl /`
 3. In the **_sass** directory, run `compass watch`
-4. Point your browser at localhost:9000
+4. Point your browser at localhost:4000
 
 ## Jekyll Project Structure
 Jekyll builds projects from component parts into a static HTML site, which is in the **_site** directory. Don't edit any files in there, they'll get overwritten each time Jekyll builds. A leading underscore in a file or folder name indicates to Jekyll to not output that file/directory into the generated _site. 
