@@ -8537,7 +8537,7 @@ fieldset[disabled] .btn {
 
 /* line 51, ../../_sass/_signup.sass */
 h2 {
-  margin-top: 22px;
+  margin-top: 11px;
   margin-bottom: 22px;
 }
 
@@ -8569,10 +8569,18 @@ h2 {
 }
 
 /* line 81, ../../_sass/_signup.sass */
+.country-select {
+  border: 1px solid #999999;
+  background: white;
+  font-size: 1.6rem;
+  max-width: 100%;
+}
+
+/* line 87, ../../_sass/_signup.sass */
 .input-group-addon-select {
   padding: 0;
 }
-/* line 83, ../../_sass/_signup.sass */
+/* line 89, ../../_sass/_signup.sass */
 .input-group-addon-select select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -8583,29 +8591,29 @@ h2 {
   position: relative;
   cursor: context-menu;
 }
-/* line 93, ../../_sass/_signup.sass */
+/* line 99, ../../_sass/_signup.sass */
 .input-group-addon-select select:not(:valid) {
   background-color: #fcf8e3;
 }
-/* line 95, ../../_sass/_signup.sass */
+/* line 101, ../../_sass/_signup.sass */
 .input-group-addon-select select:valid {
   background-color: #dff0d8;
 }
 @media (min-width: 768px) {
-  /* line 83, ../../_sass/_signup.sass */
+  /* line 89, ../../_sass/_signup.sass */
   .input-group-addon-select select {
     font-size: 150%;
     padding: 11px;
   }
 }
 
-/* line 127, ../../_sass/_signup.sass */
+/* line 133, ../../_sass/_signup.sass */
 .single-page-signup .main {
   display: block;
   min-height: 100vh;
   margin: 0 auto 2rem;
 }
-/* line 131, ../../_sass/_signup.sass */
+/* line 137, ../../_sass/_signup.sass */
 .single-page-signup .content {
   padding: 0 4rem 4rem;
   background: white;
@@ -8613,26 +8621,26 @@ h2 {
   position: relative;
 }
 @media (max-width: 992px) {
-  /* line 131, ../../_sass/_signup.sass */
+  /* line 137, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 0 2rem 2rem;
   }
 }
 @media (max-width: 768px) {
-  /* line 131, ../../_sass/_signup.sass */
+  /* line 137, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 0 1rem 2rem;
   }
 }
 @media (max-width: 480px) {
-  /* line 131, ../../_sass/_signup.sass */
+  /* line 137, ../../_sass/_signup.sass */
   .single-page-signup .content {
     padding: 0;
   }
 }
 
 @media (max-width: 480px) {
-  /* line 148, ../../_sass/_signup.sass */
+  /* line 154, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn {
     display: block;
     width: 100%;
@@ -8640,12 +8648,12 @@ h2 {
     margin: 0;
     border-bottom-width: 0;
   }
-  /* line 154, ../../_sass/_signup.sass */
+  /* line 160, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn:first-of-type {
     border-top-left-radius: 4px !important;
     border-top-right-radius: 4px !important;
   }
-  /* line 157, ../../_sass/_signup.sass */
+  /* line 163, ../../_sass/_signup.sass */
   .authentication-mode-buttons.btn-group > label.btn:last-of-type {
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
