@@ -15,7 +15,7 @@ $ ->
   , false
 
   $.ajax 
-    url: "json/country-phone-data.json"
+    url: "{{ site.baseurl }}json/country-phone-data.json"
     cache: false
   .done ( data ) ->
     App.countryData = data

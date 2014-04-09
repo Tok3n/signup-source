@@ -13,7 +13,7 @@
       return FastClick.attach(document.body);
     }, false);
     $.ajax({
-      url: "json/country-phone-data.json",
+      url: "{{ site.baseurl }}json/country-phone-data.json",
       cache: false
     }).done(function(data) {
       return App.countryData = data;

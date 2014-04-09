@@ -1,5 +1,5 @@
 name: Tok3n Developer Sign Up
-baseurl: //secure.tok3n.com/static/login/2014-04-06/
+baseurl: //secure.tok3n.com/static/login/2014-04-07/
 markdown: redcarpet
 pygments: true
 exclude: [node_modules]
