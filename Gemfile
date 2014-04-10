@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+gem 'compass'
+gem 'jekyll'
+gem 'bootstrap-sass'
+gem 'compass-flexbox'
