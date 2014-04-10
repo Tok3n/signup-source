@@ -3207,8 +3207,8 @@ input[type="button"].btn-block {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("//secure.tok3n.com/static/login/2014-04-07/fonts/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("//secure.tok3n.com/static/login/2014-04-07/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("//secure.tok3n.com/static/login/2014-04-07/fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("//secure.tok3n.com/static/login/2014-04-07/fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("//secure.tok3n.com/static/login/2014-04-07/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 
 /* line 21, ../../../../../../../.rvm/gems/ruby-2.0.0-p451@global/gems/bootstrap-sass-3.1.1.0/vendor/assets/stylesheets/bootstrap/_glyphicons.scss */
