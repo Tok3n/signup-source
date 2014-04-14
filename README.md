@@ -22,6 +22,6 @@ This is a little unexpected: for files *outside* the _includes directory, you ne
 The `watch` processes don't seem to work exactly as expected for SASS -> CSS, for whatever reason. To force a rebuild I sometimes need to hit save on _sass/styles.scss, with the SublimeOnSaveBuild package active.
 
 ## Pushing Changes
-Before pushing to GitHub, stop the Jekyll watch process and run `jekyll build`, which will give the correct relative paths to all links.
+Before pushing to GitHub, stop the Jekyll watch process and run `jekyll build`, which will give the correct relative paths to all links. The base path can be can be configured in the _config.yml file (which is the config that is ued by `jekyll build` by default). 
 
 
