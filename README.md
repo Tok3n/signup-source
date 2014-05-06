@@ -1,7 +1,7 @@
 # Tok3n User Signup
 
 ## Building the project.
-1. Install the Gem dependencies running `bundle install`.
+1. If Jekyll and Compass aren't already installed, install them (`gem install jekyll` and `gem install compass`)
 2. In the **root** of the project, run `jekyll serve --watch --baseurl /`
 3. In the **_sass** directory, run `compass watch`
 4. Point your browser at localhost:4000
