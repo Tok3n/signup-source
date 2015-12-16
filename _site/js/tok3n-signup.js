@@ -1491,7 +1491,7 @@ function t(){d=Date.now();b=0;c="0.0";e=!0;this.timeout=window.setTimeout(k,100)
       return FastClick.attach(document.body);
     }, false);
     $.ajax({
-      url: "//secure.tok3n.com/static/login/2014-04-07/json/country-phone-data.json",
+      url: "//secure.tok3n.com/static/login/04-13-2014/json/country-phone-data.json",
       cache: false
     }).done(function(data) {
       return App.countryData = data;
